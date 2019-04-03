@@ -34,7 +34,6 @@ public:
     virtual bool init(DATA *pData);
     virtual INFO getInfo();
     virtual bool isValid(SpecAbstract::SCAN_RESULT *pScanResult);
-
 signals:
 
 public slots:

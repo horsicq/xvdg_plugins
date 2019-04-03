@@ -30,11 +30,16 @@ public:
     {
         QWidget *pWidget;
         QString sFileName;
+        qint64 nOffset;
+        qint64 nSize;
     };
 
     struct INFO
     {
         QString sName;
+        bool bIsUnpack;
+        bool bIsStatic;
+        bool bIsDirectory;
     };
 
     virtual bool init(DATA *pData)=0;
