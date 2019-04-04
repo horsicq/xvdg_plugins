@@ -33,7 +33,6 @@ public:
         qint64 nOffset;
         qint64 nSize;
     };
-
     struct INFO
     {
         QString sName;
@@ -41,7 +40,6 @@ public:
         bool bIsStatic;
         bool bIsDirectory;
     };
-
     virtual bool init(DATA *pData)=0;
     virtual INFO getInfo()=0;
     virtual bool isValid(SpecAbstract::SCAN_RESULT *pScanResult)=0;
