@@ -33,7 +33,7 @@ public:
     explicit Plugin_Zip(QObject *parent = nullptr);
     virtual bool init(DATA *pData);
     virtual INFO getInfo();
-    virtual bool isValid(SpecAbstract::SCAN_RESULT *pScanResult);
+    virtual bool isValid(SpecAbstract::SCAN_RESULT *pScanResult,bool bIsHeader);
 signals:
 
 public slots:

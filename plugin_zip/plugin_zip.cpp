@@ -37,7 +37,7 @@ PluginInterface::INFO Plugin_Zip::getInfo()
     return info;
 }
 
-bool Plugin_Zip::isValid(SpecAbstract::SCAN_RESULT *pScanResult)
+bool Plugin_Zip::isValid(SpecAbstract::SCAN_RESULT *pScanResult, bool bIsHeader)
 {
-    return true;
+    return false;
 }
