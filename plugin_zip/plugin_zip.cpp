@@ -25,12 +25,12 @@ Plugin_Zip::Plugin_Zip(QObject *parent) : QObject(parent)
 
 }
 
-bool Plugin_Zip::init(PluginInterface::DATA *pData)
+bool Plugin_Zip::init(XvdgPluginInterface::DATA *pData)
 {
     return true;
 }
 
-PluginInterface::INFO Plugin_Zip::getInfo()
+XvdgPluginInterface::INFO Plugin_Zip::getInfo()
 {
     INFO info;
 

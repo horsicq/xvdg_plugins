@@ -24,9 +24,10 @@
 #include <QObject>
 #include "plugin_interface.h"
 
-class Plugin_MSDOS : public QObject, PluginInterface
+class Plugin_MSDOS : public QObject, XvdgPluginInterface
 {
     Q_OBJECT
+    Q_INTERFACES(XvdgPluginInterface)
 public:
     explicit Plugin_MSDOS(QObject *parent = nullptr);
     virtual bool init(DATA *pData);

@@ -25,12 +25,12 @@ Plugin_MSDOS::Plugin_MSDOS(QObject *parent) : QObject(parent)
 
 }
 
-bool Plugin_MSDOS::init(PluginInterface::DATA *pData)
+bool Plugin_MSDOS::init(XvdgPluginInterface::DATA *pData)
 {
     return true;
 }
 
-PluginInterface::INFO Plugin_MSDOS::getInfo()
+XvdgPluginInterface::INFO Plugin_MSDOS::getInfo()
 {
     INFO info;
 

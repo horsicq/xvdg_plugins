@@ -25,12 +25,12 @@ Plugin_ELF::Plugin_ELF(QObject *parent) : QObject(parent)
 
 }
 
-bool Plugin_ELF::init(PluginInterface::DATA *pData)
+bool Plugin_ELF::init(XvdgPluginInterface::DATA *pData)
 {
     return true;
 }
 
-PluginInterface::INFO Plugin_ELF::getInfo()
+XvdgPluginInterface::INFO Plugin_ELF::getInfo()
 {
     INFO info;
 

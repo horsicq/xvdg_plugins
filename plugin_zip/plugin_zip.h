@@ -24,11 +24,10 @@
 #include <QObject>
 #include "plugin_interface.h"
 
-class Plugin_Zip : public QObject, PluginInterface
+class Plugin_Zip : public QObject, XvdgPluginInterface
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "ntinfo.XVedogon.Plugin_Zip")
-    Q_INTERFACES(PluginInterface)
+    Q_INTERFACES(XvdgPluginInterface)
 public:
     explicit Plugin_Zip(QObject *parent = nullptr);
     virtual bool init(DATA *pData);

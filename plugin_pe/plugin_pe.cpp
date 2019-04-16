@@ -25,14 +25,16 @@ Plugin_PE::Plugin_PE(QObject *parent) : QObject(parent)
 
 }
 
-bool Plugin_PE::init(PluginInterface::DATA *pData)
+bool Plugin_PE::init(XvdgPluginInterface::DATA *pData)
 {
     return true;
 }
 
-PluginInterface::INFO Plugin_PE::getInfo()
+XvdgPluginInterface::INFO Plugin_PE::getInfo()
 {
     INFO info;
+
+    info.sName="PE";
 
     return info;
 }

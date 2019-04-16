@@ -25,12 +25,12 @@ Plugin_MACH::Plugin_MACH(QObject *parent) : QObject(parent)
 
 }
 
-bool Plugin_MACH::init(PluginInterface::DATA *pData)
+bool Plugin_MACH::init(XvdgPluginInterface::DATA *pData)
 {
     return true;
 }
 
-PluginInterface::INFO Plugin_MACH::getInfo()
+XvdgPluginInterface::INFO Plugin_MACH::getInfo()
 {
     INFO info;
 

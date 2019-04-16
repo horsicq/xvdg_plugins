@@ -24,9 +24,10 @@
 #include <QObject>
 #include "plugin_interface.h"
 
-class Plugin_ELF : public QObject, PluginInterface
+class Plugin_ELF : public QObject, XvdgPluginInterface
 {
     Q_OBJECT
+    Q_INTERFACES(XvdgPluginInterface)
 public:
     explicit Plugin_ELF(QObject *parent = nullptr);
     virtual bool init(DATA *pData);

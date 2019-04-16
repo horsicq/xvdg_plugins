@@ -23,7 +23,7 @@
 
 #include "specabstract.h"
 
-class PluginInterface
+class XvdgPluginInterface
 {
 public:
     struct DATA
@@ -46,7 +46,7 @@ public:
 };
 
 QT_BEGIN_NAMESPACE
-Q_DECLARE_INTERFACE(PluginInterface,"xvdg.plugininterface/1.0")
+Q_DECLARE_INTERFACE(XvdgPluginInterface,"xvdg.plugininterface/1.0")
 QT_END_NAMESPACE
 
 #endif // PLUGIN_INTERFACE_H
