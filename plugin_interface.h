@@ -36,9 +36,11 @@ public:
     struct INFO
     {
         QString sName;
-        bool bIsUnpack;
-        bool bIsStatic;
-        bool bIsDirectory;
+        bool bIsViewer;
+        bool bIsEditor;
+        bool bIsRuntimeUnpack;
+        bool bIsStaticUnpack;
+        bool bIsResultAsDirectory;
     };
     virtual bool init(DATA *pData)=0;
     virtual INFO getInfo()=0;
