@@ -39,7 +39,17 @@ XvdgPluginInterface::INFO Plugin_PE::getInfo()
     return info;
 }
 
-bool Plugin_PE::isValid(SpecAbstract::SCAN_RESULT *pScanResult, bool bIsHeader)
+bool Plugin_PE::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
 {
-    return false;
+    bool bResult=false;
+
+    if((pScanStruct->id.filetype==SpecAbstract::RECORD_FILETYPE_PE32)||(pScanStruct->id.filetype==SpecAbstract::RECORD_FILETYPE_PE64))
+    {
+        if((pScanStruct->name==SpecAbstract::RECORD_NAME_GENERIC)&&(pScanStruct->type==SpecAbstract::RECORD_TYPE_GENERIC))
+        {
+            bResult=true;
+        }
+    }
+
+    return bResult;
 }

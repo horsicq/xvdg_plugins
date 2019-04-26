@@ -37,7 +37,7 @@ XvdgPluginInterface::INFO Plugin_ELF::getInfo()
     return info;
 }
 
-bool Plugin_ELF::isValid(SpecAbstract::SCAN_RESULT *pScanResult, bool bIsHeader)
+bool Plugin_ELF::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
 {
     return false;
 }

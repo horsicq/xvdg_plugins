@@ -32,7 +32,7 @@ public:
     explicit Plugin_ELF(QObject *parent = nullptr);
     virtual bool init(DATA *pData);
     virtual INFO getInfo();
-    virtual bool isValid(SpecAbstract::SCAN_RESULT *pScanResult,bool bIsHeader);
+    virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct);
 signals:
 
 public slots:

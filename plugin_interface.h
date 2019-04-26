@@ -44,7 +44,7 @@ public:
     };
     virtual bool init(DATA *pData)=0;
     virtual INFO getInfo()=0;
-    virtual bool isValid(SpecAbstract::SCAN_RESULT *pScanResult,bool bIsHeader)=0;
+    virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)=0;
 };
 
 QT_BEGIN_NAMESPACE
