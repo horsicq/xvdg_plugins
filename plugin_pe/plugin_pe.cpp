@@ -32,9 +32,12 @@ bool Plugin_PE::init(XvdgPluginInterface::DATA *pData)
 
 XvdgPluginInterface::INFO Plugin_PE::getInfo()
 {
-    INFO info;
+    INFO info={};
 
     info.sName="PE";
+    info.bIsViewer=true;
+    info.bIsReadOnly=false;
+
 
     return info;
 }

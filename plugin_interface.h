@@ -37,9 +37,9 @@ public:
     {
         QString sName;
         bool bIsViewer;
-        bool bIsEditor;
-        bool bIsRuntimeUnpack;
-        bool bIsStaticUnpack;
+        bool bIsReadOnly;
+        bool bIsUnpacker;
+        bool bIsRunTime;
         bool bIsResultAsDirectory;
     };
     virtual bool init(DATA *pData)=0;
