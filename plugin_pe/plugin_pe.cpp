@@ -25,9 +25,9 @@ Plugin_PE::Plugin_PE(QObject *parent) : QObject(parent)
 
 }
 
-bool Plugin_PE::init(XvdgPluginInterface::DATA *pData)
+QWidget *Plugin_PE::getViewerWidget(XvdgPluginInterface::DATA *pData)
 {
-    return true;
+    return nullptr;
 }
 
 XvdgPluginInterface::INFO Plugin_PE::getInfo()
@@ -37,7 +37,6 @@ XvdgPluginInterface::INFO Plugin_PE::getInfo()
     info.sName="PE";
     info.bIsViewer=true;
     info.bIsReadOnly=false;
-
 
     return info;
 }

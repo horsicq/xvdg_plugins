@@ -25,9 +25,9 @@ Plugin_Zip::Plugin_Zip(QObject *parent) : QObject(parent)
 
 }
 
-bool Plugin_Zip::init(XvdgPluginInterface::DATA *pData)
+QWidget *Plugin_Zip::getViewerWidget(XvdgPluginInterface::DATA *pData)
 {
-    return true;
+    return nullptr;
 }
 
 XvdgPluginInterface::INFO Plugin_Zip::getInfo()

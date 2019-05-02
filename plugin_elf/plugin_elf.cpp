@@ -25,9 +25,9 @@ Plugin_ELF::Plugin_ELF(QObject *parent) : QObject(parent)
 
 }
 
-bool Plugin_ELF::init(XvdgPluginInterface::DATA *pData)
+QWidget *Plugin_ELF::getViewerWidget(XvdgPluginInterface::DATA *pData)
 {
-    return true;
+    return nullptr;
 }
 
 XvdgPluginInterface::INFO Plugin_ELF::getInfo()

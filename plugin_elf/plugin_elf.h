@@ -30,7 +30,7 @@ class Plugin_ELF : public QObject, XvdgPluginInterface
     Q_INTERFACES(XvdgPluginInterface)
 public:
     explicit Plugin_ELF(QObject *parent = nullptr);
-    virtual bool init(DATA *pData);
+    virtual QWidget *getViewerWidget(DATA *pData);
     virtual INFO getInfo();
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct);
 signals:

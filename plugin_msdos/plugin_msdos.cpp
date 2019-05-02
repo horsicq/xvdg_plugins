@@ -25,9 +25,9 @@ Plugin_MSDOS::Plugin_MSDOS(QObject *parent) : QObject(parent)
 
 }
 
-bool Plugin_MSDOS::init(XvdgPluginInterface::DATA *pData)
+QWidget *Plugin_MSDOS::getViewerWidget(XvdgPluginInterface::DATA *pData)
 {
-    return true;
+    return nullptr;
 }
 
 XvdgPluginInterface::INFO Plugin_MSDOS::getInfo()

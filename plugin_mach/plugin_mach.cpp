@@ -25,9 +25,9 @@ Plugin_MACH::Plugin_MACH(QObject *parent) : QObject(parent)
 
 }
 
-bool Plugin_MACH::init(XvdgPluginInterface::DATA *pData)
+QWidget *Plugin_MACH::getViewerWidget(XvdgPluginInterface::DATA *pData)
 {
-    return true;
+    return nullptr;
 }
 
 XvdgPluginInterface::INFO Plugin_MACH::getInfo()
