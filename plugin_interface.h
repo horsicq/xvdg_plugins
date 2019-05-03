@@ -29,7 +29,7 @@ class XvdgPluginInterface
 public:
     struct DATA
     {
-        QWidget *pParent;
+//        QWidget *pParent;
         QIODevice *pDevice;
     };
     struct INFO

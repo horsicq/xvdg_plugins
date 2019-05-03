@@ -22,12 +22,12 @@
 
 Plugin_PE::Plugin_PE(QObject *parent) : QObject(parent)
 {
-
+    options.nImageBase=-1;
 }
 
 QWidget *Plugin_PE::getViewerWidget(XvdgPluginInterface::DATA *pData)
 {
-    return nullptr;
+    return new PEWidget(pData->pDevice,&options);
 }
 
 XvdgPluginInterface::INFO Plugin_PE::getInfo()
