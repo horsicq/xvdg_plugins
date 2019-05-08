@@ -22,6 +22,7 @@
 
 Plugin_PE::Plugin_PE(QObject *parent) : QObject(parent)
 {
+    options={};
     options.nImageBase=-1;
 }
 

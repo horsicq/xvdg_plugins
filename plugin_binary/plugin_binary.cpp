@@ -22,6 +22,7 @@
 
 Plugin_Binary::Plugin_Binary(QObject *parent) : QObject(parent)
 {
+    options={};
     options.nImageBase=-1;
 }
 
