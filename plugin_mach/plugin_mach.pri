@@ -11,3 +11,8 @@ HEADERS += \
 
 SOURCES += \
     $$PWD/plugin_mach.cpp
+
+!contains(XCONFIG, machwidget) {
+    XCONFIG += machwidget
+    include(../../FormatWidgets/MACH/machwidget.pri)
+}

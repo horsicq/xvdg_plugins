@@ -22,22 +22,37 @@
 
 Plugin_MACH::Plugin_MACH(QObject *parent) : QObject(parent)
 {
-
+    options={};
+    options.nImageBase=-1;
 }
 
 QWidget *Plugin_MACH::getViewerWidget(XvdgPluginInterface::DATA *pData)
 {
-    return nullptr;
+    return new MACHWidget(pData->pDevice,&options);
 }
 
 XvdgPluginInterface::INFO Plugin_MACH::getInfo()
 {
-    INFO info;
+    INFO info={};
+
+    info.sName="MACH";
+    info.bIsViewer=true;
+    info.bIsReadOnly=false;
 
     return info;
 }
 
 bool Plugin_MACH::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
 {
-    return false;
+    bool bResult=false;
+
+    if((pScanStruct->id.filetype==SpecAbstract::RECORD_FILETYPE_MACH32)||(pScanStruct->id.filetype==SpecAbstract::RECORD_FILETYPE_MACH64))
+    {
+        if((pScanStruct->name==SpecAbstract::RECORD_NAME_GENERIC)&&(pScanStruct->type==SpecAbstract::RECORD_TYPE_GENERIC))
+        {
+            bResult=true;
+        }
+    }
+
+    return bResult;
 }
