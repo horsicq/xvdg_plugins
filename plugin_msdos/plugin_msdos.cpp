@@ -22,22 +22,37 @@
 
 Plugin_MSDOS::Plugin_MSDOS(QObject *parent) : QObject(parent)
 {
-
+    options= {};
+    options.nImageBase=-1;
 }
 
 QWidget *Plugin_MSDOS::getViewerWidget(XvdgPluginInterface::DATA *pData)
 {
-    return nullptr;
+    return new MSDOSWidget(pData->pDevice,&options);
 }
 
 XvdgPluginInterface::INFO Plugin_MSDOS::getInfo()
 {
-    INFO info;
+    INFO info= {};
+
+    info.sName="MSDOS";
+    info.bIsViewer=true;
+    info.bIsReadOnly=false;
 
     return info;
 }
 
 bool Plugin_MSDOS::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
 {
-    return false;
+    bool bResult=false;
+
+    if(pScanStruct->id.filetype==SpecAbstract::RECORD_FILETYPE_MSDOS)
+    {
+        if((pScanStruct->name==SpecAbstract::RECORD_NAME_GENERIC)&&(pScanStruct->type==SpecAbstract::RECORD_TYPE_GENERIC))
+        {
+            bResult=true;
+        }
+    }
+
+    return bResult;
 }

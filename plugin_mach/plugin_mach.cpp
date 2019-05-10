@@ -22,7 +22,7 @@
 
 Plugin_MACH::Plugin_MACH(QObject *parent) : QObject(parent)
 {
-    options={};
+    options= {};
     options.nImageBase=-1;
 }
 
@@ -33,7 +33,7 @@ QWidget *Plugin_MACH::getViewerWidget(XvdgPluginInterface::DATA *pData)
 
 XvdgPluginInterface::INFO Plugin_MACH::getInfo()
 {
-    INFO info={};
+    INFO info= {};
 
     info.sName="MACH";
     info.bIsViewer=true;

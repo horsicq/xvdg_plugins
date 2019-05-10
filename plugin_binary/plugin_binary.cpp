@@ -22,7 +22,7 @@
 
 Plugin_Binary::Plugin_Binary(QObject *parent) : QObject(parent)
 {
-    options={};
+    options= {};
     options.nImageBase=-1;
 }
 
@@ -33,7 +33,7 @@ QWidget *Plugin_Binary::getViewerWidget(XvdgPluginInterface::DATA *pData)
 
 XvdgPluginInterface::INFO Plugin_Binary::getInfo()
 {
-    INFO info={};
+    INFO info= {};
 
     info.sName="Binary";
     info.bIsViewer=true;

@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include "plugin_interface.h"
+#include "msdoswidget.h"
 
 class Plugin_MSDOS : public QObject, XvdgPluginInterface
 {
@@ -36,6 +37,9 @@ public:
 signals:
 
 public slots:
+
+private:
+    FormatWidget::OPTIONS options;
 };
 
 #endif // PLUGIN_MSDOS_H
