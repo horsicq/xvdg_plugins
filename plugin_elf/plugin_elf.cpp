@@ -32,7 +32,11 @@ QWidget *Plugin_ELF::getViewerWidget(XvdgPluginInterface::DATA *pData)
 
 XvdgPluginInterface::INFO Plugin_ELF::getInfo()
 {
-    INFO info;
+    INFO info= {};
+
+    info.sName="ELF";
+    info.bIsViewer=true;
+    info.bIsReadOnly=false;
 
     return info;
 }

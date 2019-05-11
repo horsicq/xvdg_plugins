@@ -32,7 +32,11 @@ QWidget *Plugin_Zip::getViewerWidget(XvdgPluginInterface::DATA *pData)
 
 XvdgPluginInterface::INFO Plugin_Zip::getInfo()
 {
-    INFO info;
+    INFO info= {};
+
+    info.sName="Zip";
+    info.bIsViewer=true;
+    info.bIsReadOnly=false;
 
     return info;
 }

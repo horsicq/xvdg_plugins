@@ -30,7 +30,7 @@ class Plugin_MACH : public QObject, XvdgPluginInterface
     Q_OBJECT
     Q_INTERFACES(XvdgPluginInterface)
 public:
-    explicit Plugin_MACH(QObject *parent = nullptr);
+    explicit Plugin_MACH(QObject *parent =nullptr);
     virtual QWidget *getViewerWidget(DATA *pData);
     virtual INFO getInfo();
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct);
