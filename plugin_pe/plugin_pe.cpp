@@ -35,7 +35,7 @@ XvdgPluginInterface::INFO Plugin_PE::getInfo()
 {
     INFO info= {};
 
-    info.sName="PE";
+    info.sName="PE v1.0";
     info.bIsViewer=true;
     info.bIsReadOnly=false;
 
