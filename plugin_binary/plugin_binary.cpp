@@ -35,7 +35,7 @@ XvdgPluginInterface::INFO Plugin_Binary::getInfo()
 {
     INFO info= {};
 
-    info.sName="Binary";
+    info.sName="Binary v1.0";
     info.bIsViewer=true;
     info.bIsReadOnly=false;
 
@@ -55,4 +55,10 @@ bool Plugin_Binary::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
     }
 
     return bResult;
+}
+
+bool Plugin_Binary::unpack(QString sFileName)
+{
+    Q_UNUSED(sFileName)
+    return false;
 }

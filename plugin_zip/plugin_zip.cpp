@@ -34,7 +34,7 @@ XvdgPluginInterface::INFO Plugin_Zip::getInfo()
 {
     INFO info= {};
 
-    info.sName="Zip";
+    info.sName="Zip v1.0";
     info.bIsViewer=true;
     info.bIsReadOnly=false;
 
@@ -43,5 +43,11 @@ XvdgPluginInterface::INFO Plugin_Zip::getInfo()
 
 bool Plugin_Zip::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
 {
+    return false;
+}
+
+bool Plugin_Zip::unpack(QString sFileName)
+{
+    Q_UNUSED(sFileName)
     return false;
 }

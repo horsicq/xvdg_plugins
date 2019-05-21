@@ -34,7 +34,7 @@ XvdgPluginInterface::INFO Plugin_ELF::getInfo()
 {
     INFO info= {};
 
-    info.sName="ELF";
+    info.sName="ELF v1.0";
     info.bIsViewer=true;
     info.bIsReadOnly=false;
 
@@ -43,5 +43,11 @@ XvdgPluginInterface::INFO Plugin_ELF::getInfo()
 
 bool Plugin_ELF::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
 {
+    return false;
+}
+
+bool Plugin_ELF::unpack(QString sFileName)
+{
+    Q_UNUSED(sFileName)
     return false;
 }

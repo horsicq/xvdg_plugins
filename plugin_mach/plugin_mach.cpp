@@ -35,7 +35,7 @@ XvdgPluginInterface::INFO Plugin_MACH::getInfo()
 {
     INFO info= {};
 
-    info.sName="MACH";
+    info.sName="MACH v1.0";
     info.bIsViewer=true;
     info.bIsReadOnly=false;
 
@@ -55,4 +55,10 @@ bool Plugin_MACH::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
     }
 
     return bResult;
+}
+
+bool Plugin_MACH::unpack(QString sFileName)
+{
+    Q_UNUSED(sFileName)
+    return false;
 }

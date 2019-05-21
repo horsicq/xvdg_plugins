@@ -35,7 +35,7 @@ XvdgPluginInterface::INFO Plugin_MSDOS::getInfo()
 {
     INFO info= {};
 
-    info.sName="MSDOS";
+    info.sName="MSDOS v1.0";
     info.bIsViewer=true;
     info.bIsReadOnly=false;
 
@@ -55,4 +55,10 @@ bool Plugin_MSDOS::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
     }
 
     return bResult;
+}
+
+bool Plugin_MSDOS::unpack(QString sFileName)
+{
+    Q_UNUSED(sFileName)
+    return false;
 }

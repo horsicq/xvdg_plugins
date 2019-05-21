@@ -33,6 +33,8 @@ public:
     virtual QWidget *getViewerWidget(DATA *pData);
     virtual INFO getInfo();
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct);
+    virtual bool unpack(QString sFileName);
+
 signals:
 
 public slots:

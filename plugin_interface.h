@@ -44,6 +44,7 @@ public:
     virtual QWidget *getViewerWidget(DATA *pData)=0;
     virtual INFO getInfo()=0;
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)=0;
+    virtual bool unpack(QString sFileName)=0;
 };
 
 QT_BEGIN_NAMESPACE
