@@ -22,12 +22,13 @@
 
 Plugin_ELF::Plugin_ELF(QObject *parent) : QObject(parent)
 {
-
+    options= {};
+    options.nImageBase=-1;
 }
 
 QWidget *Plugin_ELF::getViewerWidget(XvdgPluginInterface::DATA *pData)
 {
-    return nullptr;
+    return new ELFWidget(pData->pDevice,&options);
 }
 
 XvdgPluginInterface::INFO Plugin_ELF::getInfo()
@@ -43,7 +44,17 @@ XvdgPluginInterface::INFO Plugin_ELF::getInfo()
 
 bool Plugin_ELF::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
 {
-    return false;
+    bool bResult=false;
+
+    if((pScanStruct->id.filetype==SpecAbstract::RECORD_FILETYPE_ELF32)||(pScanStruct->id.filetype==SpecAbstract::RECORD_FILETYPE_ELF64))
+    {
+        if((pScanStruct->name==SpecAbstract::RECORD_NAME_GENERIC)&&(pScanStruct->type==SpecAbstract::RECORD_TYPE_GENERIC))
+        {
+            bResult=true;
+        }
+    }
+
+    return bResult;
 }
 
 bool Plugin_ELF::unpack(QString sFileName)

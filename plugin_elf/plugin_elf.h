@@ -23,13 +23,14 @@
 
 #include <QObject>
 #include "plugin_interface.h"
+#include "elfwidget.h"
 
 class Plugin_ELF : public QObject, XvdgPluginInterface
 {
     Q_OBJECT
     Q_INTERFACES(XvdgPluginInterface)
 public:
-    explicit Plugin_ELF(QObject *parent =nullptr);
+    explicit Plugin_ELF(QObject *parent=nullptr);
     virtual QWidget *getViewerWidget(DATA *pData);
     virtual INFO getInfo();
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct);
@@ -38,6 +39,9 @@ public:
 signals:
 
 public slots:
+
+private:
+    FormatWidget::OPTIONS options;
 };
 
 #endif // PLUGIN_ELF_H
