@@ -57,7 +57,7 @@ bool Plugin_MSDOS::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
     return bResult;
 }
 
-bool Plugin_MSDOS::unpack(QString sFileName)
+bool Plugin_MSDOS::rtUnpack(QString sFileName)
 {
     Q_UNUSED(sFileName)
     return false;

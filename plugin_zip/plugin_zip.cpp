@@ -46,7 +46,7 @@ bool Plugin_Zip::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
     return false;
 }
 
-bool Plugin_Zip::unpack(QString sFileName)
+bool Plugin_Zip::rtUnpack(QString sFileName)
 {
     Q_UNUSED(sFileName)
     return false;

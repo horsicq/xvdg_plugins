@@ -57,7 +57,7 @@ bool Plugin_ELF::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
     return bResult;
 }
 
-bool Plugin_ELF::unpack(QString sFileName)
+bool Plugin_ELF::rtUnpack(QString sFileName)
 {
     Q_UNUSED(sFileName)
     return false;

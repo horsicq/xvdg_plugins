@@ -57,7 +57,7 @@ bool Plugin_Binary::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
     return bResult;
 }
 
-bool Plugin_Binary::unpack(QString sFileName)
+bool Plugin_Binary::rtUnpack(QString sFileName)
 {
     Q_UNUSED(sFileName)
     return false;

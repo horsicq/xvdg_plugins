@@ -57,7 +57,7 @@ bool Plugin_MACH::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
     return bResult;
 }
 
-bool Plugin_MACH::unpack(QString sFileName)
+bool Plugin_MACH::rtUnpack(QString sFileName)
 {
     Q_UNUSED(sFileName)
     return false;
