@@ -22,15 +22,17 @@
 
 Plugin_MACH::Plugin_MACH(QObject *parent) : QObject(parent)
 {
+#ifdef QT_GUI_LIB
     options= {};
     options.nImageBase=-1;
+#endif
 }
-
+#ifdef QT_GUI_LIB
 QWidget *Plugin_MACH::getViewerWidget(XvdgPluginInterface::DATA *pData)
 {
-    return new MACHWidget(pData->pDevice,&options);
+    return new MACHWidget(pData->pDevice,&options,pData->pParent);
 }
-
+#endif
 XvdgPluginInterface::INFO Plugin_MACH::getInfo()
 {
     INFO info= {};

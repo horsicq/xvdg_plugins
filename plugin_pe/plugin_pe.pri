@@ -12,7 +12,9 @@ HEADERS += \
 SOURCES += \
     $$PWD/plugin_pe.cpp
 
-!contains(XCONFIG, pewidget) {
-    XCONFIG += pewidget
-    include(../../FormatWidgets/PE/pewidget.pri)
+contains(QT,gui) {
+    !contains(XCONFIG, pewidget) {
+        XCONFIG += pewidget
+        include(../../FormatWidgets/PE/pewidget.pri)
+    }
 }

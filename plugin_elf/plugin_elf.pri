@@ -12,7 +12,9 @@ HEADERS += \
 SOURCES += \
     $$PWD/plugin_elf.cpp
 
-!contains(XCONFIG, elfwidget) {
-    XCONFIG += elfwidget
-    include(../../FormatWidgets/ELF/elfwidget.pri)
+contains(QT,gui) {
+    !contains(XCONFIG, elfwidget) {
+        XCONFIG += elfwidget
+        include(../../FormatWidgets/ELF/elfwidget.pri)
+    }
 }

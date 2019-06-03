@@ -22,15 +22,17 @@
 
 Plugin_PE::Plugin_PE(QObject *parent) : QObject(parent)
 {
+#ifdef QT_GUI_LIB
     options= {};
     options.nImageBase=-1;
+#endif
 }
-
+#ifdef QT_GUI_LIB
 QWidget *Plugin_PE::getViewerWidget(XvdgPluginInterface::DATA *pData)
 {
-    return new PEWidget(pData->pDevice,&options);
+    return new PEWidget(pData->pDevice,&options,pData->pParent);
 }
-
+#endif
 XvdgPluginInterface::INFO Plugin_PE::getInfo()
 {
     INFO info= {};

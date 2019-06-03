@@ -12,7 +12,10 @@ HEADERS += \
 SOURCES += \
     $$PWD/plugin_binary.cpp
 
-!contains(XCONFIG, binarywidget) {
-    XCONFIG += binarywidget
-    include(../../FormatWidgets/Binary/binarywidget.pri)
+contains(QT,gui) {
+    !contains(XCONFIG, binarywidget) {
+        XCONFIG += binarywidget
+        include(../../FormatWidgets/Binary/binarywidget.pri)
+    }
 }
+

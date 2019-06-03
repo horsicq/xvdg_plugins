@@ -34,10 +34,6 @@ public:
     virtual INFO getInfo();
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct);
     virtual bool rtUnpack(QString sFileName);
-
-signals:
-
-public slots:
 };
 
 #endif // PLUGIN_ZIP_H

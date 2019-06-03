@@ -22,15 +22,17 @@
 
 Plugin_MSDOS::Plugin_MSDOS(QObject *parent) : QObject(parent)
 {
+#ifdef QT_GUI_LIB
     options= {};
     options.nImageBase=-1;
+#endif
 }
-
+#ifdef QT_GUI_LIB
 QWidget *Plugin_MSDOS::getViewerWidget(XvdgPluginInterface::DATA *pData)
 {
-    return new MSDOSWidget(pData->pDevice,&options);
+    return new MSDOSWidget(pData->pDevice,&options,pData->pParent);
 }
-
+#endif
 XvdgPluginInterface::INFO Plugin_MSDOS::getInfo()
 {
     INFO info= {};

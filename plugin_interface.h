@@ -21,7 +21,9 @@
 #ifndef PLUGIN_INTERFACE_H
 #define PLUGIN_INTERFACE_H
 
+#ifdef QT_GUI_LIB
 #include <QDialog>
+#endif
 #include "specabstract.h"
 
 class XvdgPluginInterface
@@ -29,7 +31,7 @@ class XvdgPluginInterface
 public:
     struct DATA
     {
-        //        QWidget *pParent;
+        QWidget *pParent;
         QIODevice *pDevice;
     };
     struct INFO
@@ -41,7 +43,9 @@ public:
         bool bIsRunTime;
         bool bIsResultAsDirectory;
     };
+#ifdef QT_GUI_LIB
     virtual QWidget *getViewerWidget(DATA *pData)=0;
+#endif
     virtual INFO getInfo()=0;
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)=0;
     virtual bool rtUnpack(QString sFileName)=0;

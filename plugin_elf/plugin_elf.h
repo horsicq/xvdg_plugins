@@ -23,7 +23,9 @@
 
 #include <QObject>
 #include "plugin_interface.h"
+#ifdef QT_GUI_LIB
 #include "elfwidget.h"
+#endif
 
 class Plugin_ELF : public QObject, XvdgPluginInterface
 {
@@ -31,17 +33,17 @@ class Plugin_ELF : public QObject, XvdgPluginInterface
     Q_INTERFACES(XvdgPluginInterface)
 public:
     explicit Plugin_ELF(QObject *parent=nullptr);
+#ifdef QT_GUI_LIB
     virtual QWidget *getViewerWidget(DATA *pData);
+#endif
     virtual INFO getInfo();
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct);
     virtual bool rtUnpack(QString sFileName);
 
-signals:
-
-public slots:
-
 private:
+#ifdef QT_GUI_LIB
     FormatWidget::OPTIONS options;
+#endif
 };
 
 #endif // PLUGIN_ELF_H

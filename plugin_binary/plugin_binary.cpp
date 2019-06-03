@@ -22,15 +22,17 @@
 
 Plugin_Binary::Plugin_Binary(QObject *parent) : QObject(parent)
 {
+#ifdef QT_GUI_LIB
     options= {};
     options.nImageBase=-1;
+#endif
 }
-
+#ifdef QT_GUI_LIB
 QWidget *Plugin_Binary::getViewerWidget(XvdgPluginInterface::DATA *pData)
 {
-    return new BinaryWidget(pData->pDevice,&options);
+    return new BinaryWidget(pData->pDevice,&options,pData->pParent);
 }
-
+#endif
 XvdgPluginInterface::INFO Plugin_Binary::getInfo()
 {
     INFO info= {};

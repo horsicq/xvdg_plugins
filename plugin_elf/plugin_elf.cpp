@@ -22,15 +22,17 @@
 
 Plugin_ELF::Plugin_ELF(QObject *parent) : QObject(parent)
 {
+#ifdef QT_GUI_LIB
     options= {};
     options.nImageBase=-1;
+#endif
 }
-
+#ifdef QT_GUI_LIB
 QWidget *Plugin_ELF::getViewerWidget(XvdgPluginInterface::DATA *pData)
 {
-    return new ELFWidget(pData->pDevice,&options);
+    return new ELFWidget(pData->pDevice,&options,pData->pParent);
 }
-
+#endif
 XvdgPluginInterface::INFO Plugin_ELF::getInfo()
 {
     INFO info= {};

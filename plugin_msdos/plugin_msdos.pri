@@ -12,7 +12,10 @@ HEADERS += \
 SOURCES += \
     $$PWD/plugin_msdos.cpp
 
-!contains(XCONFIG, msdoswidget) {
-    XCONFIG += msdoswidget
-    include(../../FormatWidgets/MSDOS/msdoswidget.pri)
+contains(QT,gui) {
+    !contains(XCONFIG, msdoswidget) {
+        XCONFIG += msdoswidget
+        include(../../FormatWidgets/MSDOS/msdoswidget.pri)
+    }
 }
+
