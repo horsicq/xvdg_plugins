@@ -37,7 +37,9 @@ XvdgPluginInterface::INFO Plugin_MSDOS::getInfo()
 {
     INFO info= {};
 
-    info.sName="MSDOS v1.0";
+    info.sName="msdos";
+    info.sVersion="1.00";
+    info.sDescription="MSDOS";
     info.bIsViewer=true;
     info.bIsReadOnly=false;
 

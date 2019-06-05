@@ -37,7 +37,9 @@ XvdgPluginInterface::INFO Plugin_MACH::getInfo()
 {
     INFO info= {};
 
-    info.sName="MACH v1.0";
+    info.sName="mach";
+    info.sVersion="1.00";
+    info.sDescription="MACH";
     info.bIsViewer=true;
     info.bIsReadOnly=false;
 

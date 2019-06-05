@@ -34,7 +34,9 @@ XvdgPluginInterface::INFO Plugin_Zip::getInfo()
 {
     INFO info= {};
 
-    info.sName="Zip v1.0";
+    info.sName="zip";
+    info.sVersion="1.00";
+    info.sDescription="Zip";
     info.bIsViewer=true;
     info.bIsReadOnly=false;
 

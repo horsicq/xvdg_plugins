@@ -37,7 +37,9 @@ XvdgPluginInterface::INFO Plugin_ELF::getInfo()
 {
     INFO info= {};
 
-    info.sName="ELF v1.0";
+    info.sName="elf";
+    info.sVersion="1.00";
+    info.sDescription="ELF";
     info.bIsViewer=true;
     info.bIsReadOnly=false;
 

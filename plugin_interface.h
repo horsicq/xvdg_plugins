@@ -37,6 +37,8 @@ public:
     struct INFO
     {
         QString sName;
+        QString sVersion;
+        QString sDescription;
         bool bIsViewer;
         bool bIsReadOnly;
         bool bIsUnpacker;

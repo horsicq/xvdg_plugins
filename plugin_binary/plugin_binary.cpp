@@ -37,7 +37,9 @@ XvdgPluginInterface::INFO Plugin_Binary::getInfo()
 {
     INFO info= {};
 
-    info.sName="Binary v1.0";
+    info.sName="binary";
+    info.sVersion="1.00";
+    info.sDescription="Binary";
     info.bIsViewer=true;
     info.bIsReadOnly=false;
 
