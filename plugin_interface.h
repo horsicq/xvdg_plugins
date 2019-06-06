@@ -50,7 +50,7 @@ public:
 #endif
     virtual INFO getInfo()=0;
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)=0;
-    virtual bool rtUnpack(QString sFileName)=0;
+    virtual bool rtUnpack(QString sFileName)=0; // TODO options
     // TODO Static unpack
 };
 
