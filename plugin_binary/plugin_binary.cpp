@@ -50,7 +50,7 @@ bool Plugin_Binary::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
 {
     bool bResult=false;
 
-    if(pScanStruct->id.filetype==SpecAbstract::RECORD_FILETYPE_BINARY)
+    if((pScanStruct->id.filetype==SpecAbstract::RECORD_FILETYPE_BINARY)&&(!pScanStruct->id.bVirtual))
     {
         if((pScanStruct->name==SpecAbstract::RECORD_NAME_GENERIC)&&(pScanStruct->type==SpecAbstract::RECORD_TYPE_GENERIC))
         {
