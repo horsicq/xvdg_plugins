@@ -15,7 +15,7 @@ SOURCES += \
 contains(QT,gui) {
     !contains(XCONFIG, machwidget) {
         XCONFIG += machwidget
-        include(../../FormatWidgets/MACH/machwidget.pri)
+        include(../../../_mylibs/FormatWidgets/MACH/machwidget.pri)
     }
 }
 

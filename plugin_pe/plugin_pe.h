@@ -30,18 +30,20 @@
 class Plugin_PE : public QObject, XvdgPluginInterface
 {
     Q_OBJECT
+#ifndef STATIC_PLUGINS
+    Q_PLUGIN_METADATA(IID "xvdg.PE")
+#endif
     Q_INTERFACES(XvdgPluginInterface)
 public:
     explicit Plugin_PE(QObject *parent =nullptr);
-#ifdef QT_GUI_LIB
-    virtual QWidget *getViewerWidget(DATA *pData);
-#endif
     virtual INFO getInfo();
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct);
     virtual bool rtUnpack(QString sFileName);
 
-private:
 #ifdef QT_GUI_LIB
+public:
+    virtual QWidget *getViewerWidget(DATA *pData);
+private:
     FormatWidget::OPTIONS options;
 #endif
 };

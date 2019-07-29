@@ -15,7 +15,7 @@ SOURCES += \
 contains(QT,gui) {
     !contains(XCONFIG, msdoswidget) {
         XCONFIG += msdoswidget
-        include(../../FormatWidgets/MSDOS/msdoswidget.pri)
+        include(../../../_mylibs/FormatWidgets/MSDOS/msdoswidget.pri)
     }
 }
 

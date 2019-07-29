@@ -15,6 +15,6 @@ SOURCES += \
 contains(QT,gui) {
     !contains(XCONFIG, elfwidget) {
         XCONFIG += elfwidget
-        include(../../FormatWidgets/ELF/elfwidget.pri)
+        include(../../../_mylibs/FormatWidgets/ELF/elfwidget.pri)
     }
 }

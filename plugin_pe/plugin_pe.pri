@@ -15,6 +15,6 @@ SOURCES += \
 contains(QT,gui) {
     !contains(XCONFIG, pewidget) {
         XCONFIG += pewidget
-        include(../../FormatWidgets/PE/pewidget.pri)
+        include(../../../_mylibs/FormatWidgets/PE/pewidget.pri)
     }
 }

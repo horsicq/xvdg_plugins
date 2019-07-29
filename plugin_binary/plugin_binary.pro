@@ -1,3 +1,4 @@
+QT       += core gui widgets
 TARGET = msdos
 
 contains(QT_ARCH, i386) {

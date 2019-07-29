@@ -30,18 +30,20 @@
 class Plugin_Binary : public QObject, XvdgPluginInterface
 {
     Q_OBJECT
+#ifndef STATIC_PLUGINS
+    Q_PLUGIN_METADATA(IID "xvdg.Binary")
+#endif
     Q_INTERFACES(XvdgPluginInterface)
 public:
     explicit Plugin_Binary(QObject *parent=nullptr);
-#ifdef QT_GUI_LIB
-    virtual QWidget *getViewerWidget(DATA *pData);
-#endif
     virtual INFO getInfo();
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct);
     virtual bool rtUnpack(QString sFileName);
 
-private:
 #ifdef QT_GUI_LIB
+public:
+    virtual QWidget *getViewerWidget(DATA *pData);
+private:
     FormatWidget::OPTIONS options;
 #endif
 };

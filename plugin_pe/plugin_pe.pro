@@ -1,3 +1,4 @@
+QT       += core gui widgets
 TARGET = pe
 
 contains(QT_ARCH, i386) {

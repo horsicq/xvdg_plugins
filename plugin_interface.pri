@@ -6,6 +6,6 @@ HEADERS += \
 
 !contains(XCONFIG, specabstract) {
     XCONFIG += specabstract
-    include(../SpecAbstract/specabstract.pri)
+    include(../../_mylibs/SpecAbstract/specabstract.pri)
 }
 

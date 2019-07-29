@@ -27,13 +27,21 @@
 class Plugin_Zip : public QObject, XvdgPluginInterface
 {
     Q_OBJECT
+#ifndef STATIC_PLUGINS
+    Q_PLUGIN_METADATA(IID "xvdg.Zip")
+#endif
     Q_INTERFACES(XvdgPluginInterface)
 public:
     explicit Plugin_Zip(QObject *parent =nullptr);
-    virtual QWidget *getViewerWidget(DATA *pData);
     virtual INFO getInfo();
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct);
     virtual bool rtUnpack(QString sFileName);
+
+#ifdef QT_GUI_LIB
+public:
+    virtual QWidget *getViewerWidget(DATA *pData);
+private:
+#endif
 };
 
 #endif // PLUGIN_ZIP_H

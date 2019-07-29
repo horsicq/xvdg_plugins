@@ -15,7 +15,7 @@ SOURCES += \
 contains(QT,gui) {
     !contains(XCONFIG, binarywidget) {
         XCONFIG += binarywidget
-        include(../../FormatWidgets/Binary/binarywidget.pri)
+        include(../../../_mylibs/FormatWidgets/Binary/binarywidget.pri)
     }
 }
 
