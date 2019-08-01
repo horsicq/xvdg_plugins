@@ -61,8 +61,6 @@ bool Unpacker_UPX::rtUnpack(QString sFileName)
 {
     qDebug("Unpack");
 
-    emit messageString("__DEBUG__");
-
     if(pUnpacker)
     {
         delete pUnpacker;
@@ -71,6 +69,9 @@ bool Unpacker_UPX::rtUnpack(QString sFileName)
     }
 
     pUnpacker=new UPX_PE_RT_Unpacker;
+
+    connect(pUnpacker,SIGNAL(messageString(quint32,QString)),this,SLOT(messageSlot(quint32,QString)));
+
     pUnpacker->setResultFileName(XBinary::getUnpackedName(sFileName));
 
     XDebugger::OPTIONS options={};
@@ -87,4 +88,9 @@ void Unpacker_UPX::rtStop()
     {
         pUnpacker->stop();
     }
+}
+
+void Unpacker_UPX::messageSlot(quint32 nType, QString sText)
+{
+    emit messageString(GenericUnpacker::convertXDebuggerMessageType((XDebugger::MESSAGE_TYPE)nType),sText);
 }

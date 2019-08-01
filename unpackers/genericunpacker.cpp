@@ -24,3 +24,18 @@ GenericUnpacker::GenericUnpacker(QObject *parent) : QObject(parent)
 {
 
 }
+
+GenericUnpacker::MESSAGE_TYPE GenericUnpacker::convertXDebuggerMessageType(XDebugger::MESSAGE_TYPE messageType)
+{
+    GenericUnpacker::MESSAGE_TYPE result=GenericUnpacker::MESSAGE_TYPE_UNKNOWN;
+
+    switch(messageType)
+    {
+        case XDebugger::MESSAGE_TYPE_UNKNOWN:   result=GenericUnpacker::MESSAGE_TYPE_UNKNOWN; break;
+        case XDebugger::MESSAGE_TYPE_ERROR:     result=GenericUnpacker::MESSAGE_TYPE_ERROR; break;
+        case XDebugger::MESSAGE_TYPE_INFO:      result=GenericUnpacker::MESSAGE_TYPE_INFO; break;
+        case XDebugger::MESSAGE_TYPE_WARNING:   result=GenericUnpacker::MESSAGE_TYPE_WARNING; break;
+    }
+
+    return result;
+}

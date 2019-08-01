@@ -39,10 +39,11 @@ public:
     virtual bool rtUnpack(QString sFileName);
     virtual void rtStop();
 
-    QObject* getObject() { return this; }
-
 signals:
-    void messageString(QString sText);
+    void messageString(quint32 nType,QString sText);
+
+private slots:
+    void messageSlot(quint32 nType, QString sText);
 
 private:
     UPX_PE_RT_Unpacker *pUnpacker;

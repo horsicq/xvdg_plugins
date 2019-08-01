@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include "unpacker_plugin_interface.h"
+#include "xunpacker.h"
 
 class GenericUnpacker : public QObject
 {
@@ -30,11 +31,13 @@ class GenericUnpacker : public QObject
 public:
     enum MESSAGE_TYPE
     {
+        MESSAGE_TYPE_UNKNOWN=0,
         MESSAGE_TYPE_INFO,
         MESSAGE_TYPE_WARNING,
         MESSAGE_TYPE_ERROR
     };
     explicit GenericUnpacker(QObject *parent=nullptr);
+    static MESSAGE_TYPE convertXDebuggerMessageType(XDebugger::MESSAGE_TYPE messageType);
 };
 
 #endif // GENERICUNPACKER_H
