@@ -37,7 +37,7 @@ public:
 
     virtual INFO getInfo()=0;
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)=0;
-    virtual bool rtUnpack(QString sFileName)=0;
+    virtual bool rtUnpack(QString sFileName,QString sResultFileName)=0;
     virtual void rtStop()=0;
 };
 

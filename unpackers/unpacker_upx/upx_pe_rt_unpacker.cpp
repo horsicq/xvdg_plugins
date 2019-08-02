@@ -44,6 +44,21 @@ void UPX_PE_RT_Unpacker::onFunctionEnter(XDebugger::FUNCTION_INFO *pFunctionInfo
             setBP(nOEPAddress+3,BP_TYPE_CC,BP_INFO_UNKNOWN,1,"JMP_TO_OEP");
         }
 
+        if(nImportAddress==-1)
+        {
+            _messageString(MESSAGE_TYPE_ERROR,tr("Cannot find import signature"));
+            stop();
+        }
+        if(nOEPAddress==-1)
+        {
+            _messageString(MESSAGE_TYPE_ERROR,tr("Cannop find OEP signature"));
+            stop();
+        }
+        if(nRelocsAddress==-1)
+        {
+            _messageString(MESSAGE_TYPE_WARNING,tr("Cannop find relocs signature"));
+        }
+
         // TODO Errors if no OEP and Import
     }
 }
@@ -79,7 +94,7 @@ void UPX_PE_RT_Unpacker::onBreakPoint(XDebugger::BREAKPOINT *pBp)
             addImportBuildRecord(ibr);
 
             QString sDebugString=QString("[%1] <- %2 : %3 : %4").arg(nEBX,0,16).arg(nEAX,0,16).arg(ibr.sLibrary).arg(ibr.sFunction);
-            qDebug(sDebugString.toLatin1().data());
+            _messageString(MESSAGE_TYPE_INFO,sDebugString);
         }
     }
     else if(pBp->vInfo.toString()=="RELOCS")
@@ -94,7 +109,7 @@ void UPX_PE_RT_Unpacker::onBreakPoint(XDebugger::BREAKPOINT *pBp)
         addRelocBuildRecord(rbr);
 
         QString sDebugString=QString("[%1] <- %2").arg(nEBX,0,16).arg(nEAX,0,16);
-        qDebug(sDebugString.toLatin1().data());
+        _messageString(MESSAGE_TYPE_INFO,sDebugString);
     }
     else if(pBp->vInfo.toString()=="JMP_TO_OEP")
     {

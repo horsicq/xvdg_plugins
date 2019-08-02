@@ -12,3 +12,8 @@ SOURCES += \
     XCONFIG += specabstract
     include(../../../_mylibs/SpecAbstract/specabstract.pri)
 }
+
+!contains(XCONFIG, xdebugger) {
+    XCONFIG += xdebugger
+    include(../../../_mylibs/XDebugger/xdebugger.pri)
+}

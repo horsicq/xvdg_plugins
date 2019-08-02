@@ -57,7 +57,7 @@ bool Unpacker_UPX::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
     return bResult;
 }
 
-bool Unpacker_UPX::rtUnpack(QString sFileName)
+bool Unpacker_UPX::rtUnpack(QString sFileName, QString sResultFileName)
 {
     qDebug("Unpack");
 
@@ -72,7 +72,7 @@ bool Unpacker_UPX::rtUnpack(QString sFileName)
 
     connect(pUnpacker,SIGNAL(messageString(quint32,QString)),this,SLOT(messageSlot(quint32,QString)));
 
-    pUnpacker->setResultFileName(XBinary::getUnpackedName(sFileName));
+    pUnpacker->setResultFileName(sResultFileName);
 
     XDebugger::OPTIONS options={};
     options.bShowWindow=true;
