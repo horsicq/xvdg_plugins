@@ -13,6 +13,8 @@ void UPX_PE_RT_Unpacker::_clear()
 
 void UPX_PE_RT_Unpacker::onEntryPoint(XDebugger::ENTRYPOINT_INFO *pEntryPointInfo)
 {
+    Q_UNUSED(pEntryPointInfo)
+
     addAPIHook("KERNEL32.DLL#LoadLibraryA");
 }
 
