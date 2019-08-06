@@ -11,7 +11,15 @@ void UPX_PE_RT_Unpacker::_clear()
     lastRecord={};
 }
 
-void UPX_PE_RT_Unpacker::onEntryPoint(XDebugger::ENTRYPOINT_INFO *pEntryPointInfo)
+void UPX_PE_RT_Unpacker::onFileLoad(XPE *pPE)
+{
+    if(pPE->isTLSPresent())
+    {
+        listTLSRelocs=pPE->getRelocsAsRVAList();
+    }
+}
+
+void UPX_PE_RT_Unpacker::onTargetEntryPoint(XDebugger::ENTRYPOINT_INFO *pEntryPointInfo)
 {
     Q_UNUSED(pEntryPointInfo)
 
@@ -61,7 +69,25 @@ void UPX_PE_RT_Unpacker::onFunctionEnter(XDebugger::FUNCTION_INFO *pFunctionInfo
             _messageString(MESSAGE_TYPE_WARNING,tr("Cannop find relocs signature"));
         }
 
-        // TODO Errors if no OEP and Import
+        if(getFileInfo()->bIsTLSPresent)
+        {
+            if(listTLSRelocs.count())
+            {
+                int nCount=listTLSRelocs.count();
+
+                for(int i=0;i<nCount;i++)
+                {
+                    RELOC_BUILD_RECORD rbr={};
+                    rbr.nPatchAddress=listTLSRelocs.at(i)+getTargetInfo()->nImageBase;
+                    rbr.nValue=read_uint32(rbr.nPatchAddress);
+
+                    addRelocBuildRecord(rbr);
+
+                    QString sDebugString=QString("TLS Reloc [%1] <- %2").arg(rbr.nPatchAddress,0,16).arg(rbr.nValue,0,16);
+                    _messageString(MESSAGE_TYPE_INFO,sDebugString);
+                }
+            }
+        }
     }
 }
 
@@ -95,7 +121,7 @@ void UPX_PE_RT_Unpacker::onBreakPoint(XDebugger::BREAKPOINT *pBp)
 
             addImportBuildRecord(ibr);
 
-            QString sDebugString=QString("[%1] <- %2 : %3 : %4").arg(nEBX,0,16).arg(nEAX,0,16).arg(ibr.sLibrary).arg(ibr.sFunction);
+            QString sDebugString=QString("Import [%1] <- %2 : %3 : %4").arg(nEBX,0,16).arg(nEAX,0,16).arg(ibr.sLibrary).arg(ibr.sFunction);
             _messageString(MESSAGE_TYPE_INFO,sDebugString);
         }
     }
@@ -110,7 +136,7 @@ void UPX_PE_RT_Unpacker::onBreakPoint(XDebugger::BREAKPOINT *pBp)
 
         addRelocBuildRecord(rbr);
 
-        QString sDebugString=QString("[%1] <- %2").arg(nEBX,0,16).arg(nEAX,0,16);
+        QString sDebugString=QString("Reloc [%1] <- %2").arg(rbr.nPatchAddress,0,16).arg(rbr.nValue,0,16);
         _messageString(MESSAGE_TYPE_INFO,sDebugString);
     }
     else if(pBp->vInfo.toString()=="JMP_TO_OEP")
@@ -124,7 +150,7 @@ void UPX_PE_RT_Unpacker::onStep(XDebugger::STEP *pStep)
     if(pStep->vInfo.toString()=="OEP")
     {
         DUMP_OPTIONS dumpOptions={};
-        dumpOptions.nAddressOfEntryPoint=(pStep->nAddress)-(getCreateProcessInfo()->nImageBase);
+        dumpOptions.nAddressOfEntryPoint=(pStep->nAddress)-(getTargetInfo()->nImageBase);
 
         if(dumpToFile(getResultFileName(),&dumpOptions))
         {

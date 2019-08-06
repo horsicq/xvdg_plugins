@@ -12,7 +12,8 @@ public:
 
 protected:
     virtual void _clear();
-    virtual void onEntryPoint(ENTRYPOINT_INFO *pEntryPointInfo);
+    virtual void onFileLoad(XPE *pPE);
+    virtual void onTargetEntryPoint(ENTRYPOINT_INFO *pEntryPointInfo);
     virtual void onFunctionEnter(FUNCTION_INFO *pFunctionInfo);
     virtual void onFunctionLeave(FUNCTION_INFO *pFunctionInfo);
     virtual void onBreakPoint(BREAKPOINT *pBp);
@@ -20,6 +21,7 @@ protected:
 
 private:
     XWinAPI::KERNEL32_GETPROCADDRESS lastRecord;
+    QList<qint64> listTLSRelocs;
 };
 
 #endif // UPX_PE_RT_UNPACKER_H
