@@ -28,6 +28,7 @@ void UPX_PE_RT_Unpacker::onTargetEntryPoint(XDebugger::ENTRYPOINT_INFO *pEntryPo
 
 void UPX_PE_RT_Unpacker::onFunctionEnter(XDebugger::FUNCTION_INFO *pFunctionInfo)
 {
+    // TODO 32/64
     if(pFunctionInfo->sName=="KERNEL32.DLL#LoadLibraryA")
     {
         //    89 03                   mov    DWORD PTR [ebx],eax
