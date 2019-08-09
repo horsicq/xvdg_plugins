@@ -31,25 +31,42 @@ void UPX_PE_RT_Unpacker::onFunctionEnter(XDebugger::FUNCTION_INFO *pFunctionInfo
     // TODO 32/64
     if(pFunctionInfo->sName=="KERNEL32.DLL#LoadLibraryA")
     {
+#ifndef Q_OS_WIN64
         //    89 03                   mov    DWORD PTR [ebx],eax
         //    83 c3 04                add    ebx,0x4
         qint64 nImportAddress=findSignature(pFunctionInfo->nRetAddress,0x1000,"890383C304");
+#else
+        //    48 89 03                mov    QWORD PTR [rbx],rax
+        //    48 83 c3 08             add    rbx,0x8
+        qint64 nImportAddress=findSignature(pFunctionInfo->nRetAddress,0x1000,"4889034883C308");
+#endif
         if(nImportAddress!=-1)
         {
             addAPIHook("KERNEL32.DLL#GetProcAddress");
             setBP(nImportAddress,BP_TYPE_CC,BP_INFO_UNKNOWN,-1,"IMPORT");
         }
+#ifndef Q_OS_WIN64
         //    86 c4                   xchg   ah,al
         //    01 f0                   add    eax,esi
         //    89 03                   mov    DWORD PTR [ebx],eax
         qint64 nRelocsAddress=findSignature(pFunctionInfo->nRetAddress,0x1000,"86C401F08903");
+#else
+        // TODO
+        //bswap rax
+        //add rax, rsi
+        //mov qword ptr [rbx], rax
+#endif
         if(nRelocsAddress!=-1)
         {
             setBP(nRelocsAddress+4,BP_TYPE_CC,BP_INFO_UNKNOWN,-1,"RELOCS");
         }
+#ifndef Q_OS_WIN64
         //    83 ec 80                sub    esp,0xffffff80
         //    e9 .. .. .. ..          jmp    ........
         qint64 nOEPAddress=findSignature(pFunctionInfo->nRetAddress,0x1000,"83EC80E9");
+#else
+        // TODO
+#endif
         if(nOEPAddress!=-1)
         {
             setBP(nOEPAddress+3,BP_TYPE_CC,BP_INFO_UNKNOWN,1,"JMP_TO_OEP");
@@ -62,12 +79,12 @@ void UPX_PE_RT_Unpacker::onFunctionEnter(XDebugger::FUNCTION_INFO *pFunctionInfo
         }
         if(nOEPAddress==-1)
         {
-            _messageString(MESSAGE_TYPE_ERROR,tr("Cannop find OEP signature"));
+            _messageString(MESSAGE_TYPE_ERROR,tr("Cannot find OEP signature"));
             stop();
         }
         if(nRelocsAddress==-1)
         {
-            _messageString(MESSAGE_TYPE_WARNING,tr("Cannop find relocs signature"));
+            _messageString(MESSAGE_TYPE_WARNING,tr("Cannot find relocs signature"));
         }
 
         if(getFileInfo()->bIsTLSPresent)
@@ -108,13 +125,13 @@ void UPX_PE_RT_Unpacker::onBreakPoint(XDebugger::BREAKPOINT *pBp)
 {
     if(pBp->vInfo.toString()=="IMPORT")
     {
-        quint64 nEAX=getRegister(pBp->hThread,REG_NAME_EAX);
-        quint64 nEBX=getRegister(pBp->hThread,REG_NAME_EBX);
+        quint64 nValue=getRegister(pBp->hThread,REG_NAME_EAX);
+        quint64 nPatchAddress=getRegister(pBp->hThread,REG_NAME_EBX);
 
-        if(lastRecord.nResult==nEAX)
+        if(lastRecord.nResult==nValue)
         {
             IMPORT_BUILD_RECORD ibr={};
-            ibr.nPatchAddress=nEBX;
+            ibr.nPatchAddress=nPatchAddress;
             ibr.bIsOrdinal=lastRecord.bIsOrdinal;
             ibr.nOrdinal=lastRecord.nOrdinal;
             ibr.sFunction=lastRecord.sFunction;
@@ -122,18 +139,18 @@ void UPX_PE_RT_Unpacker::onBreakPoint(XDebugger::BREAKPOINT *pBp)
 
             addImportBuildRecord(ibr);
 
-            QString sDebugString=QString("Import [%1] <- %2 : %3 : %4").arg(nEBX,0,16).arg(nEAX,0,16).arg(ibr.sLibrary).arg(ibr.sFunction);
+            QString sDebugString=QString("Import [%1] <- %2 : %3 : %4").arg(nPatchAddress,0,16).arg(nValue,0,16).arg(ibr.sLibrary).arg(ibr.sFunction);
             _messageString(MESSAGE_TYPE_INFO,sDebugString);
         }
     }
     else if(pBp->vInfo.toString()=="RELOCS")
     {
-        quint64 nEAX=getRegister(pBp->hThread,REG_NAME_EAX);
-        quint64 nEBX=getRegister(pBp->hThread,REG_NAME_EBX);
+        quint64 nValue=getRegister(pBp->hThread,REG_NAME_EAX);
+        quint64 nPatchAddress=getRegister(pBp->hThread,REG_NAME_EBX);
 
         RELOC_BUILD_RECORD rbr={};
-        rbr.nPatchAddress=nEBX;
-        rbr.nValue=nEAX;
+        rbr.nPatchAddress=nPatchAddress;
+        rbr.nValue=nValue;
 
         addRelocBuildRecord(rbr);
 
