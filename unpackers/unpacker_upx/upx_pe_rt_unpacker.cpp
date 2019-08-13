@@ -31,6 +31,7 @@ void UPX_PE_RT_Unpacker::onFunctionEnter(XDebugger::FUNCTION_INFO *pFunctionInfo
     // TODO 32/64
     if(pFunctionInfo->sName=="KERNEL32.DLL#LoadLibraryA")
     {
+        int nDelta=0;
 #ifndef Q_OS_WIN64
         //    89 03                   mov    DWORD PTR [ebx],eax
         //    83 c3 04                add    ebx,0x4
@@ -50,36 +51,44 @@ void UPX_PE_RT_Unpacker::onFunctionEnter(XDebugger::FUNCTION_INFO *pFunctionInfo
         //    01 f0                   add    eax,esi
         //    89 03                   mov    DWORD PTR [ebx],eax
         qint64 nRelocsAddress=findSignature(pFunctionInfo->nRetAddress,0x1000,"86C401F08903");
+        nDelta=4;
 #else
         //    48 0f c8                bswap  rax
         //    48 01 f0                add    rax,rsi
         //    48 89 03                mov    QWORD PTR [rbx],rax
         qint64 nRelocsAddress=findSignature(pFunctionInfo->nRetAddress,0x1000,"480FC84801F0488903");
+        nDelta=6;
 #endif
         if(nRelocsAddress!=-1)
         {
-#ifndef Q_OS_WIN64
-            setBP(nRelocsAddress+4,BP_TYPE_CC,BP_INFO_UNKNOWN,-1,"RELOCS");
-#else
-            setBP(nRelocsAddress+6,BP_TYPE_CC,BP_INFO_UNKNOWN,-1,"RELOCS");
-#endif
+            setBP(nRelocsAddress+nDelta,BP_TYPE_CC,BP_INFO_UNKNOWN,-1,"RELOCS");
         }
 #ifndef Q_OS_WIN64
         //    83 ec 80                sub    esp,0xffffff80
         //    e9 .. .. .. ..          jmp    ........
         qint64 nOEPAddress=findSignature(pFunctionInfo->nRetAddress,0x1000,"83EC80E9");
+        nDelta=3;
 #else
         //    48 83 ec 80             sub    rsp,0xffffffffffffff80
         //    e9 .. .. .. ..          jmp    .. .. .. ..
         qint64 nOEPAddress=findSignature(pFunctionInfo->nRetAddress,0x1000,"4883EC80E9");
+        nDelta=4;
+
+        if(nOEPAddress==-1)
+        {
+            // DLL
+            //  48 83 ec 80             sub    rsp,0xffffffffffffff80
+            //  4c 8b 44 24 18          mov    r8,QWORD PTR [rsp+0x18]
+            //  48 8b 54 24 10          mov    rdx,QWORD PTR [rsp+0x10]
+            //  48 8b 4c 24 08          mov    rcx,QWORD PTR [rsp+0x8]
+            //  e9 .. .. .. ..          jmp    .. .. .. ..
+            nOEPAddress=findSignature(pFunctionInfo->nRetAddress,0x1000,"4883EC804C8B442418488B542410488B4C2408E9");
+            nDelta=19;
+        }
 #endif
         if(nOEPAddress!=-1)
         {
-#ifndef Q_OS_WIN64
-            setBP(nOEPAddress+3,BP_TYPE_CC,BP_INFO_UNKNOWN,1,"JMP_TO_OEP");
-#else
-            setBP(nOEPAddress+4,BP_TYPE_CC,BP_INFO_UNKNOWN,1,"JMP_TO_OEP");
-#endif
+            setBP(nOEPAddress+nDelta,BP_TYPE_CC,BP_INFO_UNKNOWN,1,"JMP_TO_OEP");
         }
 
         if(nImportAddress==-1)

@@ -33,11 +33,26 @@ public:
         QString sDescription;
         bool bIsRunTime;
     };
+
+    enum OPTIONS_RECORD_TYPE
+    {
+        OPTIONS_RECORD_TYPE_UNKNOWN=-1,
+        OPTIONS_RECORD_TYPE_BOOL
+    };
+
+    struct OPTIONS_RECORD
+    {
+        QString sName;
+        OPTIONS_RECORD_TYPE type;
+        QVariant var;
+    };
+
     virtual ~XvdgUnpackerPluginInterface() {}
 
     virtual INFO getInfo()=0;
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)=0;
-    virtual bool rtUnpack(QString sFileName,QString sResultFileName)=0;
+    virtual QList<OPTIONS_RECORD> getDefaultOptions()=0;
+    virtual bool rtUnpack(QString sFileName,QString sResultFileName,QList<OPTIONS_RECORD> *pListOptions)=0;
     virtual void rtStop()=0;
 };
 

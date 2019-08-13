@@ -57,10 +57,15 @@ bool Unpacker_UPX::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
     return bResult;
 }
 
-bool Unpacker_UPX::rtUnpack(QString sFileName, QString sResultFileName)
+QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> Unpacker_UPX::getDefaultOptions()
 {
-    qDebug("Unpack");
+    QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> listResult;
 
+    return listResult;
+}
+
+bool Unpacker_UPX::rtUnpack(QString sFileName, QString sResultFileName,QList<OPTIONS_RECORD> *pListOptions)
+{
     if(pUnpacker)
     {
         delete pUnpacker;

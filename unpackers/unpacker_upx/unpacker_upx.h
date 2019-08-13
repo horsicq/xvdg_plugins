@@ -36,7 +36,8 @@ public:
     explicit Unpacker_UPX(QObject *parent =nullptr);
     virtual INFO getInfo();
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct);
-    virtual bool rtUnpack(QString sFileName,QString sResultName);
+    virtual QList<OPTIONS_RECORD> getDefaultOptions();
+    virtual bool rtUnpack(QString sFileName, QString sResultName, QList<OPTIONS_RECORD> *pListOptions);
     virtual void rtStop();
 
 signals:
