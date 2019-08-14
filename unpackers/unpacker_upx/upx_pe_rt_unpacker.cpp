@@ -202,6 +202,9 @@ void UPX_PE_RT_Unpacker::onStep(XDebugger::STEP *pStep)
         DUMP_OPTIONS dumpOptions={};
         dumpOptions.nAddressOfEntryPoint=(pStep->nAddress)-(getTargetInfo()->nImageBase);
 
+        dumpOptions.bFixChecksum=getUnpackOptionValue(UNPACK_OPTIONS_ID_FIXCHECKSUM).toBool();
+        dumpOptions.bPatchNWError6002=getUnpackOptionValue(UNPACK_OPTIONS_ID_PATCHNW).toBool();
+
         if(dumpToFile(getResultFileName(),&dumpOptions))
         {
             stop();

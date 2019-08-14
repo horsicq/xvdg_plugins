@@ -31,11 +31,57 @@ GenericUnpacker::MESSAGE_TYPE GenericUnpacker::convertXDebuggerMessageType(XDebu
 
     switch(messageType)
     {
-        case XDebugger::MESSAGE_TYPE_UNKNOWN:   result=GenericUnpacker::MESSAGE_TYPE_UNKNOWN; break;
-        case XDebugger::MESSAGE_TYPE_ERROR:     result=GenericUnpacker::MESSAGE_TYPE_ERROR; break;
-        case XDebugger::MESSAGE_TYPE_INFO:      result=GenericUnpacker::MESSAGE_TYPE_INFO; break;
-        case XDebugger::MESSAGE_TYPE_WARNING:   result=GenericUnpacker::MESSAGE_TYPE_WARNING; break;
+        case XDebugger::MESSAGE_TYPE_UNKNOWN:   result=GenericUnpacker::MESSAGE_TYPE_UNKNOWN;           break;
+        case XDebugger::MESSAGE_TYPE_ERROR:     result=GenericUnpacker::MESSAGE_TYPE_ERROR;             break;
+        case XDebugger::MESSAGE_TYPE_INFO:      result=GenericUnpacker::MESSAGE_TYPE_INFO;              break;
+        case XDebugger::MESSAGE_TYPE_WARNING:   result=GenericUnpacker::MESSAGE_TYPE_WARNING;           break;
     }
 
     return result;
+}
+
+QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> GenericUnpacker::convertXDebuggerUnpackOptions(QList<XUnpacker::UNPACK_OPTIONS_RECORD> *pListUnpackOptions)
+{
+    QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> listResult;
+
+    int nCount=pListUnpackOptions->count();
+
+    for(int i=0;i<nCount;i++)
+    {
+        XvdgUnpackerPluginInterface::OPTIONS_RECORD record={};
+
+        record.nID=pListUnpackOptions->at(i).nID;
+        record.sName=pListUnpackOptions->at(i).sName;
+        record.var=pListUnpackOptions->at(i).var;
+
+        if      (pListUnpackOptions->at(i).varType==XUnpacker::UNPACK_OPTIONS_VAR_TYPE_UNKNOWN)     record.varType=XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_UNKNOWN;
+        else if (pListUnpackOptions->at(i).varType==XUnpacker::UNPACK_OPTIONS_VAR_TYPE_BOOL)        record.varType=XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_BOOL;
+
+        listResult.append(record);
+    }
+
+    return listResult;
+}
+
+QList<XUnpacker::UNPACK_OPTIONS_RECORD> GenericUnpacker::convertXvdgUnpackOptions(QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> *pListUnpackOptions)
+{
+    QList<XUnpacker::UNPACK_OPTIONS_RECORD> listResult;
+
+    int nCount=pListUnpackOptions->count();
+
+    for(int i=0;i<nCount;i++)
+    {
+        XUnpacker::UNPACK_OPTIONS_RECORD record={};
+
+        record.nID=pListUnpackOptions->at(i).nID;
+        record.sName=pListUnpackOptions->at(i).sName;
+        record.var=pListUnpackOptions->at(i).var;
+
+        if      (pListUnpackOptions->at(i).varType==XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_UNKNOWN)      record.varType=XUnpacker::UNPACK_OPTIONS_VAR_TYPE_UNKNOWN;
+        else if (pListUnpackOptions->at(i).varType==XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_BOOL)         record.varType=XUnpacker::UNPACK_OPTIONS_VAR_TYPE_BOOL;
+
+        listResult.append(record);
+    }
+
+    return listResult;
 }

@@ -34,16 +34,17 @@ public:
         bool bIsRunTime;
     };
 
-    enum OPTIONS_RECORD_TYPE
+    enum OPTIONS_VAR_TYPE
     {
-        OPTIONS_RECORD_TYPE_UNKNOWN=-1,
-        OPTIONS_RECORD_TYPE_BOOL
+        OPTIONS_VAR_TYPE_UNKNOWN=-1,
+        OPTIONS_VAR_TYPE_BOOL
     };
 
     struct OPTIONS_RECORD
     {
+        qint32 nID;
         QString sName;
-        OPTIONS_RECORD_TYPE type;
+        OPTIONS_VAR_TYPE varType;
         QVariant var;
     };
 

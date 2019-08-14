@@ -38,6 +38,8 @@ public:
     };
     explicit GenericUnpacker(QObject *parent=nullptr);
     static MESSAGE_TYPE convertXDebuggerMessageType(XDebugger::MESSAGE_TYPE messageType);
+    static QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> convertXDebuggerUnpackOptions(QList<XUnpacker::UNPACK_OPTIONS_RECORD> *pListUnpackOptions);
+    static QList<XUnpacker::UNPACK_OPTIONS_RECORD> convertXvdgUnpackOptions(QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> *pListUnpackOptions);
 };
 
 #endif // GENERICUNPACKER_H

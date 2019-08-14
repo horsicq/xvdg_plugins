@@ -59,9 +59,9 @@ bool Unpacker_UPX::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
 
 QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> Unpacker_UPX::getDefaultOptions()
 {
-    QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> listResult;
+    QList<XUnpacker::UNPACK_OPTIONS_RECORD> listOptions=UPX_PE_RT_Unpacker().getDefaultUnpackOptions();
 
-    return listResult;
+    return GenericUnpacker::convertXDebuggerUnpackOptions(&listOptions);
 }
 
 bool Unpacker_UPX::rtUnpack(QString sFileName, QString sResultFileName,QList<OPTIONS_RECORD> *pListOptions)
@@ -77,14 +77,9 @@ bool Unpacker_UPX::rtUnpack(QString sFileName, QString sResultFileName,QList<OPT
 
     connect(pUnpacker,SIGNAL(messageString(quint32,QString)),this,SLOT(messageSlot(quint32,QString)));
 
-    pUnpacker->setResultFileName(sResultFileName);
+    QList<XUnpacker::UNPACK_OPTIONS_RECORD> listUnpackOptions=GenericUnpacker::convertXvdgUnpackOptions(pListOptions);
 
-    XDebugger::OPTIONS options={};
-    options.bShowWindow=true;
-
-    pUnpacker->loadFile(sFileName,&options);
-
-    return false; // TODO Check
+    return pUnpacker->unpack(sFileName,sResultFileName,&listUnpackOptions);
 }
 
 void Unpacker_UPX::rtStop()
