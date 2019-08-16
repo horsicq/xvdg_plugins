@@ -28,6 +28,7 @@
 class GenericUnpacker : public QObject
 {
     Q_OBJECT
+
 public:
     enum MESSAGE_TYPE
     {

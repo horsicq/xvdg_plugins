@@ -7,6 +7,7 @@
 class UPX_PE_RT_Unpacker : public XUnpacker
 {
     Q_OBJECT
+
 public:
     explicit UPX_PE_RT_Unpacker(QObject *parent=nullptr);
 

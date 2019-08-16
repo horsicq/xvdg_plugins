@@ -28,10 +28,12 @@
 class Viewer_Binary : public QObject, XvdgViewerPluginInterface
 {
     Q_OBJECT
+
 #ifndef STATIC_PLUGINS
     Q_PLUGIN_METADATA(IID "xvdg.viewerplugin.Binary")
 #endif
     Q_INTERFACES(XvdgViewerPluginInterface)
+
 public:
     explicit Viewer_Binary(QObject *parent=nullptr);
     virtual INFO getInfo();

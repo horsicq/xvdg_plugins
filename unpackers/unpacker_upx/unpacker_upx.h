@@ -28,10 +28,12 @@
 class Unpacker_UPX : public QObject, XvdgUnpackerPluginInterface
 {
     Q_OBJECT
+
 #ifndef STATIC_PLUGINS
     Q_PLUGIN_METADATA(IID "xvdg.unpackerplugin.UPX")
 #endif
     Q_INTERFACES(XvdgUnpackerPluginInterface)
+
 public:
     explicit Unpacker_UPX(QObject *parent =nullptr);
     virtual INFO getInfo();
