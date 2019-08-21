@@ -18,7 +18,7 @@ protected:
     virtual void onFunctionEnter(FUNCTION_INFO *pFunctionInfo);
     virtual void onFunctionLeave(FUNCTION_INFO *pFunctionInfo);
     virtual void onBreakPoint(BREAKPOINT *pBp);
-    virtual void onStep(STEP *pStep);
+    virtual void onStep(STEP_INFO *pStepInfo);
 
 private:
     XWinAPI::KERNEL32_GETPROCADDRESS lastRecord;
