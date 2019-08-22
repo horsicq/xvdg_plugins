@@ -17,7 +17,7 @@ protected:
     virtual void onTargetEntryPoint(ENTRYPOINT_INFO *pEntryPointInfo);
     virtual void onFunctionEnter(FUNCTION_INFO *pFunctionInfo);
     virtual void onFunctionLeave(FUNCTION_INFO *pFunctionInfo);
-    virtual void onBreakPoint(BREAKPOINT *pBp);
+    virtual void onBreakPoint(BREAKPOINT_INFO *pBreakPointInfo);
     virtual void onStep(STEP_INFO *pStepInfo);
 
 private:

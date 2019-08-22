@@ -119,9 +119,6 @@ void UPX_PE_RT_Unpacker::onFunctionEnter(XDebugger::FUNCTION_INFO *pFunctionInfo
                     rbr.nValue=read_uint32(rbr.nPatchAddress);
 
                     addRelocBuildRecord(rbr);
-
-                    QString sDebugString=QString("TLS Reloc [%1] <- %2").arg(rbr.nPatchAddress,0,16).arg(rbr.nValue,0,16);
-                    _messageString(MESSAGE_TYPE_INFO,sDebugString);
                 }
             }
         }
@@ -144,13 +141,13 @@ void UPX_PE_RT_Unpacker::onFunctionLeave(XDebugger::FUNCTION_INFO *pFunctionInfo
     }
 }
 
-void UPX_PE_RT_Unpacker::onBreakPoint(XDebugger::BREAKPOINT *pBp)
+void UPX_PE_RT_Unpacker::onBreakPoint(BREAKPOINT_INFO *pBreakPointInfo)
 {
-    if(pBp->vInfo.toString()=="IMPORT")
+    if(pBreakPointInfo->vInfo.toString()=="IMPORT")
     {
 #ifndef Q_OS_WIN64
-        quint64 nValue=getRegister(pBp->hThread,REG_NAME_EAX);
-        quint64 nPatchAddress=getRegister(pBp->hThread,REG_NAME_EBX);
+        quint64 nValue=getRegister(pBreakPointInfo->hThread,REG_NAME_EAX);
+        quint64 nPatchAddress=getRegister(pBreakPointInfo->hThread,REG_NAME_EBX);
 #else
         quint64 nValue=getRegister(pBp->hThread,REG_NAME_RAX);
         quint64 nPatchAddress=getRegister(pBp->hThread,REG_NAME_RBX);
@@ -163,18 +160,16 @@ void UPX_PE_RT_Unpacker::onBreakPoint(XDebugger::BREAKPOINT *pBp)
             ibr.nOrdinal=lastRecord.nOrdinal;
             ibr.sFunction=lastRecord.sFunction;
             ibr.sLibrary=lastRecord.sLibrary;
+            ibr.nValue=lastRecord.nResult;
 
             addImportBuildRecord(ibr);
-
-            QString sDebugString=QString("Import [%1] <- %2 : %3 : %4").arg(nPatchAddress,0,16).arg(nValue,0,16).arg(ibr.sLibrary).arg(ibr.sFunction);
-            _messageString(MESSAGE_TYPE_INFO,sDebugString);
         }
     }
-    else if(pBp->vInfo.toString()=="RELOCS")
+    else if(pBreakPointInfo->vInfo.toString()=="RELOCS")
     {
 #ifndef Q_OS_WIN64
-        quint64 nValue=getRegister(pBp->hThread,REG_NAME_EAX);
-        quint64 nPatchAddress=getRegister(pBp->hThread,REG_NAME_EBX);
+        quint64 nValue=getRegister(pBreakPointInfo->hThread,REG_NAME_EAX);
+        quint64 nPatchAddress=getRegister(pBreakPointInfo->hThread,REG_NAME_EBX);
 #else
         quint64 nValue=getRegister(pBp->hThread,REG_NAME_RAX);
         quint64 nPatchAddress=getRegister(pBp->hThread,REG_NAME_RBX);
@@ -185,13 +180,10 @@ void UPX_PE_RT_Unpacker::onBreakPoint(XDebugger::BREAKPOINT *pBp)
         rbr.nValue=nValue;
 
         addRelocBuildRecord(rbr);
-
-        QString sDebugString=QString("Reloc [%1] <- %2").arg(rbr.nPatchAddress,0,16).arg(rbr.nValue,0,16);
-        _messageString(MESSAGE_TYPE_INFO,sDebugString);
     }
-    else if(pBp->vInfo.toString()=="JMP_TO_OEP")
+    else if(pBreakPointInfo->vInfo.toString()=="JMP_TO_OEP")
     {
-        stepInto(pBp->hThread,"OEP");
+        stepInto(pBreakPointInfo->hThread,"OEP");
     }
 }
 
