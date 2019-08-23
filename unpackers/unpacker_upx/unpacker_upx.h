@@ -35,7 +35,7 @@ class Unpacker_UPX : public QObject, XvdgUnpackerPluginInterface
     Q_INTERFACES(XvdgUnpackerPluginInterface)
 
 public:
-    explicit Unpacker_UPX(QObject *parent =nullptr);
+    explicit Unpacker_UPX(QObject *parent=nullptr);
     virtual INFO getInfo();
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct);
     virtual QList<OPTIONS_RECORD> getDefaultOptions();

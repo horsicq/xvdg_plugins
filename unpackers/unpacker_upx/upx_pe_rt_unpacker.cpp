@@ -8,7 +8,7 @@ UPX_PE_RT_Unpacker::UPX_PE_RT_Unpacker(QObject *parent) : XUnpacker(parent)
 void UPX_PE_RT_Unpacker::_clear()
 {
     XUnpacker::_clear();
-    lastRecord={};
+    data_GetProcAddress={};
 }
 
 void UPX_PE_RT_Unpacker::onFileLoad(XPE *pPE)
@@ -23,7 +23,7 @@ void UPX_PE_RT_Unpacker::onTargetEntryPoint(XDebugger::ENTRYPOINT_INFO *pEntryPo
 {
     Q_UNUSED(pEntryPointInfo)
 
-    addAPIHook("KERNEL32.DLL#LoadLibraryA");
+    addAPIHook(pEntryPointInfo->hThread,"KERNEL32.DLL#LoadLibraryA");
 }
 
 void UPX_PE_RT_Unpacker::onFunctionEnter(XDebugger::FUNCTION_INFO *pFunctionInfo)
@@ -43,8 +43,8 @@ void UPX_PE_RT_Unpacker::onFunctionEnter(XDebugger::FUNCTION_INFO *pFunctionInfo
 #endif
         if(nImportAddress!=-1)
         {
-            addAPIHook("KERNEL32.DLL#GetProcAddress");
-            setBP(nImportAddress,BP_TYPE_CC,BP_INFO_UNKNOWN,-1,"IMPORT");
+            addAPIHook(pFunctionInfo->hThread,"KERNEL32.DLL#GetProcAddress");
+            setBP(pFunctionInfo->hThread,nImportAddress,BP_TYPE_CC,BP_INFO_UNKNOWN,-1,"IMPORT");
         }
 #ifndef Q_OS_WIN64
         //    86 c4                   xchg   ah,al
@@ -61,7 +61,7 @@ void UPX_PE_RT_Unpacker::onFunctionEnter(XDebugger::FUNCTION_INFO *pFunctionInfo
 #endif
         if(nRelocsAddress!=-1)
         {
-            setBP(nRelocsAddress+nDelta,BP_TYPE_CC,BP_INFO_UNKNOWN,-1,"RELOCS");
+            setBP(pFunctionInfo->hThread,nRelocsAddress+nDelta,BP_TYPE_CC,BP_INFO_UNKNOWN,-1,"RELOCS");
         }
 #ifndef Q_OS_WIN64
         //    83 ec 80                sub    esp,0xffffff80
@@ -88,7 +88,7 @@ void UPX_PE_RT_Unpacker::onFunctionEnter(XDebugger::FUNCTION_INFO *pFunctionInfo
 #endif
         if(nOEPAddress!=-1)
         {
-            setBP(nOEPAddress+nDelta,BP_TYPE_CC,BP_INFO_UNKNOWN,1,"JMP_TO_OEP");
+            setBP(pFunctionInfo->hThread,nOEPAddress+nDelta,BP_TYPE_CC,BP_INFO_UNKNOWN,1,"JMP_TO_OEP");
         }
 
         if(nImportAddress==-1)
@@ -125,7 +125,7 @@ void UPX_PE_RT_Unpacker::onFunctionEnter(XDebugger::FUNCTION_INFO *pFunctionInfo
     }
     else if(pFunctionInfo->sName=="KERNEL32.DLL#GetProcAddress")
     {
-        XWinAPI().handle_Kernel32_GetProcAddress(this,pFunctionInfo,XWinAPI::HANDLE_TYPE_ENTER,&lastRecord);
+        XWinAPI().handle_Kernel32_GetProcAddress(this,pFunctionInfo,XWinAPI::HANDLE_TYPE_ENTER,&data_GetProcAddress);
     }
 }
 
@@ -133,7 +133,7 @@ void UPX_PE_RT_Unpacker::onFunctionLeave(XDebugger::FUNCTION_INFO *pFunctionInfo
 {
     if(pFunctionInfo->sName=="KERNEL32.DLL#GetProcAddress")
     {
-        XWinAPI().handle_Kernel32_GetProcAddress(this,pFunctionInfo,XWinAPI::HANDLE_TYPE_LEAVE,&lastRecord);
+        XWinAPI().handle_Kernel32_GetProcAddress(this,pFunctionInfo,XWinAPI::HANDLE_TYPE_LEAVE,&data_GetProcAddress);
     }
     else if(pFunctionInfo->sName=="KERNEL32.DLL#LoadLibraryA")
     {
@@ -152,15 +152,15 @@ void UPX_PE_RT_Unpacker::onBreakPoint(BREAKPOINT_INFO *pBreakPointInfo)
         quint64 nValue=getRegister(pBp->hThread,REG_NAME_RAX);
         quint64 nPatchAddress=getRegister(pBp->hThread,REG_NAME_RBX);
 #endif
-        if(lastRecord.nResult==nValue)
+        if(data_GetProcAddress.nResult==nValue)
         {
             IMPORT_BUILD_RECORD ibr={};
             ibr.nPatchAddress=nPatchAddress;
-            ibr.bIsOrdinal=lastRecord.bIsOrdinal;
-            ibr.nOrdinal=lastRecord.nOrdinal;
-            ibr.sFunction=lastRecord.sFunction;
-            ibr.sLibrary=lastRecord.sLibrary;
-            ibr.nValue=lastRecord.nResult;
+            ibr.bIsOrdinal=data_GetProcAddress.bIsOrdinal;
+            ibr.nOrdinal=data_GetProcAddress.nOrdinal;
+            ibr.sFunction=data_GetProcAddress.sFunction;
+            ibr.sLibrary=data_GetProcAddress.sLibrary;
+            ibr.nValue=data_GetProcAddress.nResult;
 
             addImportBuildRecord(ibr);
         }
