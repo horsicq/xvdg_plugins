@@ -183,13 +183,13 @@ void UPX_PE_RT_Unpacker::onBreakPoint(BREAKPOINT_INFO *pBreakPointInfo)
     }
     else if(pBreakPointInfo->vInfo.toString()=="JMP_TO_OEP")
     {
-        stepInto(pBreakPointInfo->hThread,"OEP");
+        stepInto(pBreakPointInfo->hThread,"STEP_TO_OEP");
     }
 }
 
 void UPX_PE_RT_Unpacker::onStep(STEP_INFO *pStepInfo)
 {
-    if(pStepInfo->vInfo.toString()=="OEP")
+    if(pStepInfo->vInfo.toString()=="STEP_TO_OEP")
     {
         DUMP_OPTIONS dumpOptions={};
         dumpOptions.nAddressOfEntryPoint=(pStepInfo->nAddress)-(getTargetInfo()->nImageBase);
