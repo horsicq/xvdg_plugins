@@ -41,6 +41,7 @@ public:
     virtual QList<OPTIONS_RECORD> getDefaultOptions();
     virtual bool rtUnpack(QString sFileName, QString sResultName, QList<OPTIONS_RECORD> *pListOptions);
     virtual void rtStop();
+    virtual bool stringToOption(QString sString,XvdgUnpackerPluginInterface::OPTIONS_RECORD *pRecord);
 
 signals:
     void messageString(quint32 nType,QString sText);

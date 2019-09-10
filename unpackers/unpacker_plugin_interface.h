@@ -44,6 +44,7 @@ public:
     {
         qint32 nID;
         QString sName;
+        QString sDescription;
         OPTIONS_VAR_TYPE varType;
         QVariant var;
     };
@@ -55,6 +56,7 @@ public:
     virtual QList<OPTIONS_RECORD> getDefaultOptions()=0;
     virtual bool rtUnpack(QString sFileName,QString sResultFileName,QList<OPTIONS_RECORD> *pListOptions)=0;
     virtual void rtStop()=0;
+    virtual bool stringToOption(QString sString,XvdgUnpackerPluginInterface::OPTIONS_RECORD *pRecord)=0;
 };
 
 QT_BEGIN_NAMESPACE

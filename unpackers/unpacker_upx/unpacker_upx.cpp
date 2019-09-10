@@ -90,6 +90,11 @@ void Unpacker_UPX::rtStop()
     }
 }
 
+bool Unpacker_UPX::stringToOption(QString sString, XvdgUnpackerPluginInterface::OPTIONS_RECORD *pRecord)
+{
+    return false;
+}
+
 void Unpacker_UPX::messageSlot(quint32 nType, QString sText)
 {
     emit messageString(GenericUnpacker::convertXDebuggerMessageType((XDebugger::MESSAGE_TYPE)nType),sText);

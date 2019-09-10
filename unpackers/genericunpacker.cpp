@@ -40,6 +40,21 @@ GenericUnpacker::MESSAGE_TYPE GenericUnpacker::convertXDebuggerMessageType(XDebu
     return result;
 }
 
+XvdgUnpackerPluginInterface::OPTIONS_RECORD GenericUnpacker::convertXDebuggerUnpackOption(XUnpacker::UNPACK_OPTIONS_RECORD unpackOption)
+{
+    XvdgUnpackerPluginInterface::OPTIONS_RECORD result={};
+
+    result.nID=unpackOption.nID;
+    result.sName=unpackOption.sName;
+    result.sDescription=unpackOption.sDescription;
+    result.var=unpackOption.var;
+
+    if      (unpackOption.varType==XUnpacker::UNPACK_OPTIONS_VAR_TYPE_UNKNOWN)     result.varType=XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_UNKNOWN;
+    else if (unpackOption.varType==XUnpacker::UNPACK_OPTIONS_VAR_TYPE_BOOL)        result.varType=XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_BOOL;
+
+    return result;
+}
+
 QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> GenericUnpacker::convertXDebuggerUnpackOptions(QList<XUnpacker::UNPACK_OPTIONS_RECORD> *pListUnpackOptions)
 {
     QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> listResult;
@@ -48,16 +63,7 @@ QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> GenericUnpacker::convertXDebu
 
     for(int i=0;i<nCount;i++)
     {
-        XvdgUnpackerPluginInterface::OPTIONS_RECORD record={};
-
-        record.nID=pListUnpackOptions->at(i).nID;
-        record.sName=pListUnpackOptions->at(i).sName;
-        record.var=pListUnpackOptions->at(i).var;
-
-        if      (pListUnpackOptions->at(i).varType==XUnpacker::UNPACK_OPTIONS_VAR_TYPE_UNKNOWN)     record.varType=XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_UNKNOWN;
-        else if (pListUnpackOptions->at(i).varType==XUnpacker::UNPACK_OPTIONS_VAR_TYPE_BOOL)        record.varType=XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_BOOL;
-
-        listResult.append(record);
+        listResult.append(convertXDebuggerUnpackOption(pListUnpackOptions->at(i)));
     }
 
     return listResult;
@@ -75,6 +81,7 @@ QList<XUnpacker::UNPACK_OPTIONS_RECORD> GenericUnpacker::convertXvdgUnpackOption
 
         record.nID=pListUnpackOptions->at(i).nID;
         record.sName=pListUnpackOptions->at(i).sName;
+        record.sDescription=pListUnpackOptions->at(i).sDescription;
         record.var=pListUnpackOptions->at(i).var;
 
         if      (pListUnpackOptions->at(i).varType==XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_UNKNOWN)      record.varType=XUnpacker::UNPACK_OPTIONS_VAR_TYPE_UNKNOWN;
