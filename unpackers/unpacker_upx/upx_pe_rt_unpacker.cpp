@@ -149,8 +149,8 @@ void UPX_PE_RT_Unpacker::onBreakPoint(BREAKPOINT_INFO *pBreakPointInfo)
         quint64 nValue=getRegister(pBreakPointInfo->hThread,REG_NAME_EAX);
         quint64 nPatchAddress=getRegister(pBreakPointInfo->hThread,REG_NAME_EBX);
 #else
-        quint64 nValue=getRegister(pBp->hThread,REG_NAME_RAX);
-        quint64 nPatchAddress=getRegister(pBp->hThread,REG_NAME_RBX);
+        quint64 nValue=getRegister(pBreakPointInfo->hThread,REG_NAME_RAX);
+        quint64 nPatchAddress=getRegister(pBreakPointInfo->hThread,REG_NAME_RBX);
 #endif
         if(data_GetProcAddress.nResult==nValue)
         {
@@ -171,10 +171,9 @@ void UPX_PE_RT_Unpacker::onBreakPoint(BREAKPOINT_INFO *pBreakPointInfo)
         quint64 nValue=getRegister(pBreakPointInfo->hThread,REG_NAME_EAX);
         quint64 nPatchAddress=getRegister(pBreakPointInfo->hThread,REG_NAME_EBX);
 #else
-        quint64 nValue=getRegister(pBp->hThread,REG_NAME_RAX);
-        quint64 nPatchAddress=getRegister(pBp->hThread,REG_NAME_RBX);
+        quint64 nValue=getRegister(pBreakPointInfo->hThread,REG_NAME_RAX);
+        quint64 nPatchAddress=getRegister(pBreakPointInfo->hThread,REG_NAME_RBX);
 #endif
-
         RELOC_BUILD_RECORD rbr={};
         rbr.nPatchAddress=nPatchAddress;
         rbr.nValue=nValue;
