@@ -11,5 +11,6 @@ SUBDIRS       += unpackers/unpacker_mpress
 contains(QT_ARCH, i386) {
     SUBDIRS       += unpackers/unpacker_pex
     SUBDIRS       += unpackers/unpacker_aspack
+    SUBDIRS       += unpackers/unpacker_ahpacker
 } 
 

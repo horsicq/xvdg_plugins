@@ -182,6 +182,8 @@ void UPX_PE_RT_Unpacker::onBreakPoint(BREAKPOINT_INFO *pBreakPointInfo)
     }
     else if(pBreakPointInfo->vInfo.toString()=="JMP_TO_OEP")
     {
+        removeAPIHook("KERNEL32.DLL#GetProcAddress");
+
         stepInto(pBreakPointInfo->hThread,"STEP_TO_OEP");
     }
 }
