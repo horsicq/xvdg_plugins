@@ -14,5 +14,9 @@ contains(QT_ARCH, i386) {
     SUBDIRS       += unpackers/unpacker_ahpacker
     SUBDIRS       += unpackers/unpacker_kkrunchy
     SUBDIRS       += unpackers/unpacker_fsg
+    SUBDIRS       += unpackers/unpacker_nspack
+    SUBDIRS       += unpackers/unpacker_pecompact
+    SUBDIRS       += unpackers/unpacker_beroexepacker
+    SUBDIRS       += unpackers/unpacker_petite
 } 
 
