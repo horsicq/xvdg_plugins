@@ -41,7 +41,7 @@ public:
     virtual QWidget *getWidget(DATA *pData);
 
 private:
-    FormatWidget::OPTIONS options;
+    FW_DEF::OPTIONS options;
 };
 
 #endif // VIEWER_BINARY_H
