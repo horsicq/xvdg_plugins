@@ -11,8 +11,10 @@ void UPX_PE_RT_Unpacker::_clear()
     data_GetProcAddress={};
 }
 
-void UPX_PE_RT_Unpacker::onFileLoad(XPE *pPE)
+void UPX_PE_RT_Unpacker::onFileLoad(XBinary *pBinary)
 {
+    XPE *pPE=qobject_cast<XPE *>(pBinary);
+
     if(pPE->isTLSPresent())
     {
         listTLSRelocs=pPE->getRelocsAsRVAList();

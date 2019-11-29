@@ -13,7 +13,7 @@ public:
 
 protected:
     virtual void _clear();
-    virtual void onFileLoad(XPE *pPE);
+    virtual void onFileLoad(XBinary *pBinary);
     virtual void onTargetEntryPoint(ENTRYPOINT_INFO *pEntryPointInfo);
     virtual void onFunctionEnter(FUNCTION_INFO *pFunctionInfo);
     virtual void onFunctionLeave(FUNCTION_INFO *pFunctionInfo);
