@@ -22,34 +22,32 @@
 
 Viewer_Binary::Viewer_Binary(QObject *parent) : QObject(parent)
 {
-    options= {};
-    options.nImageBase=-1;
+    options = {};
+    options.nImageBase = -1;
 }
 QWidget *Viewer_Binary::getWidget(XvdgViewerPluginInterface::DATA *pData)
 {
-    return new BinaryWidget(pData->pDevice,&options,pData->pParent);
+    return new BinaryWidget(pData->pDevice, &options, pData->pParent);
 }
 XvdgViewerPluginInterface::INFO Viewer_Binary::getInfo()
 {
-    INFO info= {};
+    INFO info = {};
 
-    info.sName="binary";
-    info.sVersion="1.00";
-    info.sDescription="Binary";
-    info.bIsReadOnly=false;
+    info.sName = "binary";
+    info.sVersion = "1.00";
+    info.sDescription = "Binary";
+    info.bIsReadOnly = false;
 
     return info;
 }
 
 bool Viewer_Binary::isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)
 {
-    bool bResult=false;
+    bool bResult = false;
 
-    if((pScanStruct->id.filetype==SpecAbstract::RECORD_FILETYPE_BINARY)&&(!pScanStruct->id.bVirtual))
-    {
-        if((pScanStruct->name==SpecAbstract::RECORD_NAME_GENERIC)&&(pScanStruct->type==SpecAbstract::RECORD_TYPE_GENERIC))
-        {
-            bResult=true;
+    if ((pScanStruct->id.filetype == SpecAbstract::RECORD_FILETYPE_BINARY) && (!pScanStruct->id.bVirtual)) {
+        if ((pScanStruct->name == SpecAbstract::RECORD_NAME_GENERIC) && (pScanStruct->type == SpecAbstract::RECORD_TYPE_GENERIC)) {
+            bResult = true;
         }
     }
 

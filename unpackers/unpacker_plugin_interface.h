@@ -23,25 +23,21 @@
 
 #include "specabstract.h"
 
-class XvdgUnpackerPluginInterface
-{
+class XvdgUnpackerPluginInterface {
 public:
-    struct INFO
-    {
+    struct INFO {
         QString sName;
         QString sVersion;
         QString sDescription;
         bool bIsRunTime;
     };
 
-    enum OPTIONS_VAR_TYPE
-    {
-        OPTIONS_VAR_TYPE_UNKNOWN=-1,
+    enum OPTIONS_VAR_TYPE {
+        OPTIONS_VAR_TYPE_UNKNOWN = -1,
         OPTIONS_VAR_TYPE_BOOL
     };
 
-    struct OPTIONS_RECORD
-    {
+    struct OPTIONS_RECORD {
         qint32 nID;
         QString sName;
         QString sDescription;
@@ -49,18 +45,20 @@ public:
         QVariant var;
     };
 
-    virtual ~XvdgUnpackerPluginInterface() {}
+    virtual ~XvdgUnpackerPluginInterface()
+    {
+    }
 
-    virtual INFO getInfo()=0;
-    virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)=0;
-    virtual QList<OPTIONS_RECORD> getDefaultOptions()=0;
-    virtual bool rtUnpack(QString sFileName,QString sResultFileName,QList<OPTIONS_RECORD> *pListOptions)=0;
-    virtual void rtStop()=0;
-    virtual bool stringToOption(QString sString,XvdgUnpackerPluginInterface::OPTIONS_RECORD *pRecord)=0;
+    virtual INFO getInfo() = 0;
+    virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct) = 0;
+    virtual QList<OPTIONS_RECORD> getDefaultOptions() = 0;
+    virtual bool rtUnpack(QString sFileName, QString sResultFileName, QList<OPTIONS_RECORD> *pListOptions) = 0;
+    virtual void rtStop() = 0;
+    virtual bool stringToOption(QString sString, XvdgUnpackerPluginInterface::OPTIONS_RECORD *pRecord) = 0;
 };
 
 QT_BEGIN_NAMESPACE
-Q_DECLARE_INTERFACE(XvdgUnpackerPluginInterface,"xvdg.unpackerplugininterface/1.0")
+Q_DECLARE_INTERFACE(XvdgUnpackerPluginInterface, "xvdg.unpackerplugininterface/1.0")
 QT_END_NAMESPACE
 
-#endif // UNPACKER_PLUGIN_INTERFACE_H
+#endif  // UNPACKER_PLUGIN_INTERFACE_H

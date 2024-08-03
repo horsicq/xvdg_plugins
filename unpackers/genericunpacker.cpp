@@ -22,19 +22,17 @@
 
 GenericUnpacker::GenericUnpacker(QObject *parent) : QObject(parent)
 {
-
 }
 
 GenericUnpacker::MESSAGE_TYPE GenericUnpacker::convertXDebuggerMessageType(XDebugger::MESSAGE_TYPE messageType)
 {
-    GenericUnpacker::MESSAGE_TYPE result=GenericUnpacker::MESSAGE_TYPE_UNKNOWN;
+    GenericUnpacker::MESSAGE_TYPE result = GenericUnpacker::MESSAGE_TYPE_UNKNOWN;
 
-    switch(messageType)
-    {
-        case XDebugger::MESSAGE_TYPE_UNKNOWN:   result=GenericUnpacker::MESSAGE_TYPE_UNKNOWN;           break;
-        case XDebugger::MESSAGE_TYPE_ERROR:     result=GenericUnpacker::MESSAGE_TYPE_ERROR;             break;
-        case XDebugger::MESSAGE_TYPE_INFO:      result=GenericUnpacker::MESSAGE_TYPE_INFO;              break;
-        case XDebugger::MESSAGE_TYPE_WARNING:   result=GenericUnpacker::MESSAGE_TYPE_WARNING;           break;
+    switch (messageType) {
+        case XDebugger::MESSAGE_TYPE_UNKNOWN: result = GenericUnpacker::MESSAGE_TYPE_UNKNOWN; break;
+        case XDebugger::MESSAGE_TYPE_ERROR: result = GenericUnpacker::MESSAGE_TYPE_ERROR; break;
+        case XDebugger::MESSAGE_TYPE_INFO: result = GenericUnpacker::MESSAGE_TYPE_INFO; break;
+        case XDebugger::MESSAGE_TYPE_WARNING: result = GenericUnpacker::MESSAGE_TYPE_WARNING; break;
     }
 
     return result;
@@ -42,15 +40,15 @@ GenericUnpacker::MESSAGE_TYPE GenericUnpacker::convertXDebuggerMessageType(XDebu
 
 XvdgUnpackerPluginInterface::OPTIONS_RECORD GenericUnpacker::convertXDebuggerUnpackOption(XUnpacker::UNPACK_OPTIONS_RECORD unpackOption)
 {
-    XvdgUnpackerPluginInterface::OPTIONS_RECORD result={};
+    XvdgUnpackerPluginInterface::OPTIONS_RECORD result = {};
 
-    result.nID=unpackOption.nID;
-    result.sName=unpackOption.sName;
-    result.sDescription=unpackOption.sDescription;
-    result.var=unpackOption.var;
+    result.nID = unpackOption.nID;
+    result.sName = unpackOption.sName;
+    result.sDescription = unpackOption.sDescription;
+    result.var = unpackOption.var;
 
-    if      (unpackOption.varType==XUnpacker::UNPACK_OPTIONS_VAR_TYPE_UNKNOWN)     result.varType=XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_UNKNOWN;
-    else if (unpackOption.varType==XUnpacker::UNPACK_OPTIONS_VAR_TYPE_BOOL)        result.varType=XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_BOOL;
+    if (unpackOption.varType == XUnpacker::UNPACK_OPTIONS_VAR_TYPE_UNKNOWN) result.varType = XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_UNKNOWN;
+    else if (unpackOption.varType == XUnpacker::UNPACK_OPTIONS_VAR_TYPE_BOOL) result.varType = XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_BOOL;
 
     return result;
 }
@@ -59,10 +57,9 @@ QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> GenericUnpacker::convertXDebu
 {
     QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> listResult;
 
-    int nCount=pListUnpackOptions->count();
+    int nCount = pListUnpackOptions->count();
 
-    for(int i=0;i<nCount;i++)
-    {
+    for (int i = 0; i < nCount; i++) {
         listResult.append(convertXDebuggerUnpackOption(pListUnpackOptions->at(i)));
     }
 
@@ -73,19 +70,18 @@ QList<XUnpacker::UNPACK_OPTIONS_RECORD> GenericUnpacker::convertXvdgUnpackOption
 {
     QList<XUnpacker::UNPACK_OPTIONS_RECORD> listResult;
 
-    int nCount=pListUnpackOptions->count();
+    int nCount = pListUnpackOptions->count();
 
-    for(int i=0;i<nCount;i++)
-    {
-        XUnpacker::UNPACK_OPTIONS_RECORD record={};
+    for (int i = 0; i < nCount; i++) {
+        XUnpacker::UNPACK_OPTIONS_RECORD record = {};
 
-        record.nID=pListUnpackOptions->at(i).nID;
-        record.sName=pListUnpackOptions->at(i).sName;
-        record.sDescription=pListUnpackOptions->at(i).sDescription;
-        record.var=pListUnpackOptions->at(i).var;
+        record.nID = pListUnpackOptions->at(i).nID;
+        record.sName = pListUnpackOptions->at(i).sName;
+        record.sDescription = pListUnpackOptions->at(i).sDescription;
+        record.var = pListUnpackOptions->at(i).var;
 
-        if      (pListUnpackOptions->at(i).varType==XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_UNKNOWN)      record.varType=XUnpacker::UNPACK_OPTIONS_VAR_TYPE_UNKNOWN;
-        else if (pListUnpackOptions->at(i).varType==XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_BOOL)         record.varType=XUnpacker::UNPACK_OPTIONS_VAR_TYPE_BOOL;
+        if (pListUnpackOptions->at(i).varType == XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_UNKNOWN) record.varType = XUnpacker::UNPACK_OPTIONS_VAR_TYPE_UNKNOWN;
+        else if (pListUnpackOptions->at(i).varType == XvdgUnpackerPluginInterface::OPTIONS_VAR_TYPE_BOOL) record.varType = XUnpacker::UNPACK_OPTIONS_VAR_TYPE_BOOL;
 
         listResult.append(record);
     }

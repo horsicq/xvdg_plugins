@@ -25,8 +25,7 @@
 #include "genericunpacker.h"
 #include "upx_pe_rt_unpacker.h"
 
-class Unpacker_UPX : public QObject, XvdgUnpackerPluginInterface
-{
+class Unpacker_UPX : public QObject, XvdgUnpackerPluginInterface {
     Q_OBJECT
 
 #ifndef STATIC_PLUGINS
@@ -35,16 +34,16 @@ class Unpacker_UPX : public QObject, XvdgUnpackerPluginInterface
     Q_INTERFACES(XvdgUnpackerPluginInterface)
 
 public:
-    explicit Unpacker_UPX(QObject *parent=nullptr);
+    explicit Unpacker_UPX(QObject *parent = nullptr);
     virtual INFO getInfo();
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct);
     virtual QList<OPTIONS_RECORD> getDefaultOptions();
     virtual bool rtUnpack(QString sFileName, QString sResultName, QList<OPTIONS_RECORD> *pListOptions);
     virtual void rtStop();
-    virtual bool stringToOption(QString sString,XvdgUnpackerPluginInterface::OPTIONS_RECORD *pRecord);
+    virtual bool stringToOption(QString sString, XvdgUnpackerPluginInterface::OPTIONS_RECORD *pRecord);
 
 signals:
-    void messageString(quint32 nType,QString sText);
+    void messageString(quint32 nType, QString sText);
 
 private slots:
     void messageSlot(quint32 nType, QString sText);
@@ -53,4 +52,4 @@ private:
     UPX_PE_RT_Unpacker *pUnpacker;
 };
 
-#endif // UNPACKER_UPX_H
+#endif  // UNPACKER_UPX_H

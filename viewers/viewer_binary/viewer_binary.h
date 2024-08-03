@@ -25,8 +25,7 @@
 #include "viewer_plugin_interface.h"
 #include "binarywidget.h"
 
-class Viewer_Binary : public QObject, XvdgViewerPluginInterface
-{
+class Viewer_Binary : public QObject, XvdgViewerPluginInterface {
     Q_OBJECT
 
 #ifndef STATIC_PLUGINS
@@ -35,7 +34,7 @@ class Viewer_Binary : public QObject, XvdgViewerPluginInterface
     Q_INTERFACES(XvdgViewerPluginInterface)
 
 public:
-    explicit Viewer_Binary(QObject *parent=nullptr);
+    explicit Viewer_Binary(QObject *parent = nullptr);
     virtual INFO getInfo();
     virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct);
     virtual QWidget *getWidget(DATA *pData);
@@ -44,4 +43,4 @@ private:
     FW_DEF::OPTIONS options;
 };
 
-#endif // VIEWER_BINARY_H
+#endif  // VIEWER_BINARY_H

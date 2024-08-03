@@ -4,12 +4,11 @@
 #include <QObject>
 #include "xunpacker.h"
 
-class UPX_PE_RT_Unpacker : public XUnpacker
-{
+class UPX_PE_RT_Unpacker : public XUnpacker {
     Q_OBJECT
 
 public:
-    explicit UPX_PE_RT_Unpacker(QObject *parent=nullptr);
+    explicit UPX_PE_RT_Unpacker(QObject *parent = nullptr);
 
 protected:
     virtual void _clear();
@@ -25,4 +24,4 @@ private:
     QList<qint64> listTLSRelocs;
 };
 
-#endif // UPX_PE_RT_UNPACKER_H
+#endif  // UPX_PE_RT_UNPACKER_H

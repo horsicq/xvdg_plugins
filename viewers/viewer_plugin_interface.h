@@ -24,29 +24,26 @@
 #include <QDialog>
 #include "specabstract.h"
 
-class XvdgViewerPluginInterface
-{
+class XvdgViewerPluginInterface {
 public:
-    struct DATA
-    {
+    struct DATA {
         QWidget *pParent;
         QIODevice *pDevice;
     };
-    struct INFO
-    {
+    struct INFO {
         QString sName;
         QString sVersion;
         QString sDescription;
         bool bIsReadOnly;
         bool bIsRunTime;
     };
-    virtual QWidget *getWidget(DATA *pData)=0;
-    virtual INFO getInfo()=0;
-    virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct)=0;
+    virtual QWidget *getWidget(DATA *pData) = 0;
+    virtual INFO getInfo() = 0;
+    virtual bool isValid(SpecAbstract::SCAN_STRUCT *pScanStruct) = 0;
 };
 
 QT_BEGIN_NAMESPACE
-Q_DECLARE_INTERFACE(XvdgViewerPluginInterface,"xvdg.viewerplugininterface/1.0")
+Q_DECLARE_INTERFACE(XvdgViewerPluginInterface, "xvdg.viewerplugininterface/1.0")
 QT_END_NAMESPACE
 
-#endif // VIEWER_PLUGIN_INTERFACE_H
+#endif  // VIEWER_PLUGIN_INTERFACE_H

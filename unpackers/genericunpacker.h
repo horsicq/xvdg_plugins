@@ -25,23 +25,21 @@
 #include "unpacker_plugin_interface.h"
 #include "xunpacker.h"
 
-class GenericUnpacker : public QObject
-{
+class GenericUnpacker : public QObject {
     Q_OBJECT
 
 public:
-    enum MESSAGE_TYPE
-    {
-        MESSAGE_TYPE_UNKNOWN=0,
+    enum MESSAGE_TYPE {
+        MESSAGE_TYPE_UNKNOWN = 0,
         MESSAGE_TYPE_INFO,
         MESSAGE_TYPE_WARNING,
         MESSAGE_TYPE_ERROR
     };
-    explicit GenericUnpacker(QObject *parent=nullptr);
+    explicit GenericUnpacker(QObject *parent = nullptr);
     static MESSAGE_TYPE convertXDebuggerMessageType(XDebugger::MESSAGE_TYPE messageType);
     static XvdgUnpackerPluginInterface::OPTIONS_RECORD convertXDebuggerUnpackOption(XUnpacker::UNPACK_OPTIONS_RECORD unpackOption);
     static QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> convertXDebuggerUnpackOptions(QList<XUnpacker::UNPACK_OPTIONS_RECORD> *pListUnpackOptions);
     static QList<XUnpacker::UNPACK_OPTIONS_RECORD> convertXvdgUnpackOptions(QList<XvdgUnpackerPluginInterface::OPTIONS_RECORD> *pListUnpackOptions);
 };
 
-#endif // GENERICUNPACKER_H
+#endif  // GENERICUNPACKER_H
